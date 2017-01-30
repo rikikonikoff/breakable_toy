@@ -1,0 +1,9 @@
+<h1>Providers</h1>
+
+<ul style="list-style: none;">
+  <% @providers.each do |provider| %>
+    <li>
+      <%= link_to provider.name, provider_path(provider) %>
+    </li>
+  <% end %>
+</ul>

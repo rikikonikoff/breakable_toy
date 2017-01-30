@@ -1,0 +1,9 @@
+<h1>Appointments</h1>
+
+<ul style="list-style: none;">
+  <% @appointments.each do |a| %>
+    <li>
+      <%= link_to "#{a.date} @ #{a.start_time}", appointment_path(a) %>
+    </li>
+  <% end %>
+</ul>

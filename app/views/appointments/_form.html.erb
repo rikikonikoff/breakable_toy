@@ -1,0 +1,19 @@
+<ul style="list-style: none;" >
+  <%= form_for @appointment do |f| %>
+    <li>
+      <%= f.label :date %>
+      <%= date_select :appointment, :date, start_year: Date.today.year, end_year: 3.years.from_now.year %>
+    </li>
+    <li>
+      <%= f.label :start_time %>
+      <%= time_select :appointment, :start_time, ampm: true, minute_step: 15 %>
+    </li>
+    <li>
+      <%= f.label :end_time %>
+      <%= time_select :appointment, :end_time, ampm: true, minute_step: 15  %>
+    </li>
+    <li>
+      <%= f.submit "Add To My Appointments" %>
+    </li>
+  <% end %>
+</ul>
