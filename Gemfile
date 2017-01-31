@@ -8,6 +8,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'active_model_serializers'
 
 group :test do
   gem 'coveralls', require: false
