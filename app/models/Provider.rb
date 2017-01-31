@@ -9,14 +9,17 @@ class Provider < ApplicationRecord
   validates :state, presence: true
   validates :zip, numericality: true, length: { is: 5 }
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |provider|
-      provider.provider = auth.provider
-      provider.uid = auth.uid
-      provider.username = auth.info.username
-      provider.oauth_token = auth.credentials.token
-      provider.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      provider.save!
+  def self.find_or_create_from_omniauth(auth)
+    provider = auth.provider
+    uid = auth.uid
+
+    find_or_create_by(provider: provider, uid: uid) do |doc|
+      doc.provider = provider
+      doc.uid = uid
+      doc.email = auth.info.email
+      doc.username = auth.info.name
+      doc.oauth_token = auth.credentials.token
+      doc.oauth_expires_at = Time.at(auth.credentials.expires_at)
     end
   end
 end

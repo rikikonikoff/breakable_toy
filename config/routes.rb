@@ -1,14 +1,23 @@
 Rails.application.routes.draw do
-  get 'auth/:provider/callback' => 'sessions#create'
-  get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create', as: :signin
-  get '/signout' => 'sessions#destroy', as: :signout
-  get 'auth/failure'
-
-  root to: "home#show"
+  root "home#show"
   resources :home, only: [:show]
-  resources :sessions
-  resources :users
-  resources :providers
+  resources :users, only: [:show]
+  resources :providers, only: [:index, :show]
   resources :appointments
+
+  namespace :users do
+    resources :auth, only: [:show]
+    resources :sessions, only: [:new, :create, :destroy]
+  end
+
+  namespace :providers do
+    resources :auth, only: [:show]
+    resources :sessions, only: [:new, :create, :destroy]
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :appointments, only: [:index]
+    end
+  end
 end

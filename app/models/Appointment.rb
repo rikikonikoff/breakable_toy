@@ -7,4 +7,12 @@ class Appointment < ApplicationRecord
   validates :date, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
+
+  def book!
+    update_attribute(:user, current_user)
+  end
+
+  def unbook!
+    update_attribute(:user, nil)
+  end
 end
