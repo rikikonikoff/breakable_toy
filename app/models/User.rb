@@ -6,17 +6,17 @@ class User < ApplicationRecord
   validates :email, presence: true, format: { with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }
   validates :zip, numericality: true, length: { is: 5 }, allow_blank: true
 
-  def self.find_or_create_from_omniauth(auth)
-    provider = auth.provider
-    uid = auth.uid
-
-    find_or_create_by(provider: provider, uid: uid) do |user|
-      user.provider = provider
-      user.uid = uid
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.info.name
       user.email = auth.info.email
-      user.username = auth.info.name
+      user.image = auth.info.image
+      user.oauth_refresh_token = auth.credentials.refresh_token if auth.credentials.refresh_token
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.save!
     end
   end
 end

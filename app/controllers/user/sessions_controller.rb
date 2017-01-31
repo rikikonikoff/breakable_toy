@@ -1,13 +1,12 @@
-class Users::SessionsController < ApplicationController
+class User::SessionsController < ApplicationController
   def new
-    redirect_to "/users/auth/google"
+    redirect_to "/user/auth/google/callback"
   end
 
   def create
     @auth = request.env["omniauth.auth"]
-    if !@auth.nil?
-      User.find_or_create_from_omniauth(@auth)
-    end
+    user = User.from_omniauth(@auth)
+    session[:user_id] = user.id
     redirect_to root_path
   end
 

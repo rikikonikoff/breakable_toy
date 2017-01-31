@@ -1,13 +1,12 @@
 class Providers::SessionsController < ApplicationController
   def new
-    redirect_to "/providers/auth/google"
+    redirect_to "/provider/auth/google/callback"
   end
 
   def create
     @auth = request.env["omniauth.auth"]
-    if !@auth.nil?
-      Provider.find_or_create_from_omniauth(@auth)
-    end
+    provider = Provider.from_omniauth(@auth)
+    session[:provider_id] = provider.id
     redirect_to root_path
   end
 
