@@ -1,0 +1,25 @@
+<h1><%= @provider.name %></h1>
+<br/>
+<h3>
+  <%= @provider.work_address %>
+  <%= @provider.city %>
+  <%= @provider.state %>
+  <%= @provider.zip %>
+</h3>
+<br/>
+<div>
+  Appointments
+  <ul style="list-style: none;">
+    <% @appointments.each do |appointment| %>
+      <li>
+        <%= appointment.date %>
+        <%= appointment.start_time %>
+        <%= appointment.end_time %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<br/>
+<% if current_user == @provider %>
+  <%= link_to "Edit My Profile", edit_provider_path(@provider) %>
+<% end %>

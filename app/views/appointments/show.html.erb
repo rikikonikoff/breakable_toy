@@ -1,0 +1,7 @@
+<div>
+  <p>
+    Appointment with <%= @provider.name %> at <%= @appointment.start_time %> on <%= @appointment.date %>
+  </p>
+  <p>Booked: <%= @appointment.booked? %></p>
+  <p><%= @booking_button %></p>
+</div>

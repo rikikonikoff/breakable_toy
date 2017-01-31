@@ -7,7 +7,9 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'omniauth'
+gem 'gmail'
 gem 'omniauth-google-oauth2'
+gem 'active_model_serializers'
 
 group :test do
   gem 'coveralls', require: false
@@ -20,6 +22,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'launchy', require: false

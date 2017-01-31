@@ -4,19 +4,16 @@ class Provider < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, format: { with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }
-  validates :work_address, presence: true
-  validates :city, presence: true
-  validates :state, presence: true
-  validates :zip, numericality: true, length: { is: 5 }
+  validates :zip, numericality: true, length: { is: 5 }, allow_blank: true
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |provider|
-      provider.provider = auth.provider
-      provider.uid = auth.uid
-      provider.username = auth.info.username
-      provider.oauth_token = auth.credentials.token
-      provider.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      provider.save!
+  def self.create_with_omniauth(auth)
+    create! do |p|
+      p.provider = auth.provider
+      p.uid = auth.uid
+      p.name = auth.info.name
+      p.email = auth.info.email
+      p.oauth_token = auth.credentials.token
+      p.oauth_expires_at = Time.at(auth.credentials.expires_at)
     end
   end
 end

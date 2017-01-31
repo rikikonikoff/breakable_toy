@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
-  get 'auth/:provider/callback' => 'sessions#create'
-  get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create', as: :signin
-  get '/signout' => 'sessions#destroy', as: :signout
-  get 'auth/failure'
+  get "auth/google_oauth2/callback", to: 'sessions#create', as: 'login'
+  get '/auth/google_oauth2?session_type=provider', to: 'sessions#create', as: 'login_provider'
+  get '/auth/google_oauth2?session_type=user', to: 'sessions#create', as: 'login_user'
 
-  root to: "home#show"
+  root "home#show"
   resources :home, only: [:show]
-  resources :sessions
+  resources :appointments
   resources :users
   resources :providers
-  resources :appointments
+  resources :auth, only: [:show]
+  resources :sessions, only: [:create, :destroy]
+
+  namespace :api do
+    namespace :v1 do
+      resources :appointments, only: [:index]
+    end
+  end
 end

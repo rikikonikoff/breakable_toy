@@ -1,8 +1,8 @@
 class AppointmentsController < ApplicationController
 
   def index
-    if signed_in_provider
-      @appointments = Appointments.where(provider: current_user)
+    if session[:provider_id]
+      @appointments = Appointment.where(provider: current_user)
     else
       @appointments = Appointment.all
     end
@@ -10,6 +10,12 @@ class AppointmentsController < ApplicationController
 
   def show
     @appointment = Appointment.find(params[:id])
+    @provider = @appointment.provider
+    if @appointment.booked? && @appointment.user == current_user
+      @booking_button = button_tag "Cancel Booking", onClick: @appointment.unbook!
+    elsif !@appointment.booked?
+      @booking_button = button_tag "Book Appointment", onClick: @appointment.book!
+    end
   end
 
   def new

@@ -1,2 +1,15 @@
-<h1>Home#show</h1>
-<p>Find me in app/views/home/show.html.erb</p>
+<div>
+  I am a...
+  <br/>
+
+  <%= form_tag "/auth/google_oauth2?session_type=provider" %>
+  <%= radio_button_tag "session type", "Provider" %>
+  <%= label_tag "Provider (Mental Health Care Professional)" %>
+  <%= submit_tag "Sign In" %>
+  <br/>
+
+  <%= form_tag "/auth/google_oauth2?session_type=user" %>
+  <%= radio_button_tag "session type", "User" %>
+  <%= label_tag "User (Seeking Services)" %>
+  <%= submit_tag "Sign In" %>
+</div>
