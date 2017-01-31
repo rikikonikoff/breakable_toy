@@ -1,5 +1,6 @@
 class ProvidersController < ApplicationController
   def index
+    binding.pry
     @providers = Provider.all
   end
 
@@ -9,13 +10,23 @@ class ProvidersController < ApplicationController
   end
 
   def new
-    @provider = Provider.new
+    @provider = Provider.new(oauth_uid: session[:auth]["uid"])
+    redirect_to providers_path, method: :post
   end
 
   def create
-    @provider = provider.new(provider_params)
+    binding.pry
+    @info = session[:auth]["info"]
+    @provider = Provider.new(oauth_uid: session[:auth]["uid"])
+    @provider.name = @info["name"]
+    @provider.email = @info["email"]
     if @provider.save
-      redirect_to providers_path
+      session[:auth].clear
+      session[:provider_id] = @provider.id
+      @provider.touch :last_signed_in_at
+      @provider.increment! :sign_in_count
+      flash[:notice] = "Signed in as #{@provider.name}"
+      redirect_to @provider
     else
       flash[:notice] = "Couldn't sign in"
       redirect_to :back
@@ -25,11 +36,5 @@ class ProvidersController < ApplicationController
   def destroy
     @provider = Provider.find(params[:id])
     @provider.destroy
-  end
-
-  private
-
-  def provider_params
-    params.require[:provider].permit[:name, :email, :password, :password_confirmation]
   end
 end
