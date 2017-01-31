@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     !session[:user_id].nil?
   end
 
-  def signed_in_admin
+  def signed_in_provider
     !session[:provider_id].nil?
   end
 end

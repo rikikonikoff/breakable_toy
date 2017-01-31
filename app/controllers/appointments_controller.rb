@@ -1,8 +1,8 @@
 class AppointmentsController < ApplicationController
 
   def index
-    if current_provider
-      @appointments = Appointments.where(provider: current_provider)
+    if signed_in_provider
+      @appointments = Appointments.where(provider: current_user)
     else
       @appointments = Appointment.all
     end
@@ -13,12 +13,17 @@ class AppointmentsController < ApplicationController
   end
 
   def new
-    @appointment = Appointment.new
+    if signed_in_provider
+      @appointment = Appointment.new
+    else
+      flash[:notice] = "Sorry, you can't create new appointments"
+      redirect_to appointments_path
+    end
   end
 
   def create
     @appointment = Appointment.new(appointment_params)
-    @provider = current_provider
+    @provider = current_user
     @appointment.provider = @provider
     if @appointment.save
       flash[:notice] = "Appointment Created"
@@ -36,7 +41,7 @@ class AppointmentsController < ApplicationController
 
   def update
     @appointment = Appointment.find(params[:id])
-    @provider = current_provider
+    @provider = current_user
     if @appointment.update
       flash[:notice] = "Appointment Updated"
       redirect_to @provider
@@ -48,7 +53,7 @@ class AppointmentsController < ApplicationController
 
   def destroy
     @appointment = Appointment.find(params[:id])
-    @provider = current_provider
+    @provider = current_user
     if @appointment.destroy
       flash[:notice] = "Appointment Removed"
       redirect_to @provider
