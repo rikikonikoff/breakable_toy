@@ -2,13 +2,13 @@
   I am a...
   <br/>
 
-  <%= form_tag "/auth/google_oauth2/callback" %>
+  <%= form_tag "/auth/google_oauth2?session_type=provider" %>
   <%= radio_button_tag "session type", "Provider" %>
   <%= label_tag "Provider (Mental Health Care Professional)" %>
   <%= submit_tag "Sign In" %>
   <br/>
 
-  <%= form_tag "/auth/google_oauth2" %>
+  <%= form_tag "/auth/google_oauth2?session_type=user" %>
   <%= radio_button_tag "session type", "User" %>
   <%= label_tag "User (Seeking Services)" %>
   <%= submit_tag "Sign In" %>

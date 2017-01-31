@@ -1,6 +1,5 @@
 class ProvidersController < ApplicationController
   def index
-    binding.pry
     @providers = Provider.all
   end
 

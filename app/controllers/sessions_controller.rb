@@ -4,15 +4,14 @@ class SessionsController < ApplicationController
 
   def create
     @auth = request.env["omniauth.auth"]
-    binding.pry
-    if params[session_type: "provider"]
+    @params = request.env["omniauth.params"]
+    if @params[session_type: "provider"]
       @provider = Provider.from_omniauth(@auth)
       redirect_to @provider
-    elsif params[session_type: "user"]
+    elsif @params[session_type: "user"]
       User.from_omniauth(@auth)
       redirect_to appointments_path
     end
-    redirect_to root_path
   end
 
   def destroy
