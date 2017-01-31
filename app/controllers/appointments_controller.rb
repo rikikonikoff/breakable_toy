@@ -1,8 +1,8 @@
 class AppointmentsController < ApplicationController
 
   def index
-    if signed_in_provider
-      @appointments = Appointments.where(provider: current_user)
+    if session[:provider_id]
+      @appointments = Appointment.where(provider: current_user)
     else
       @appointments = Appointment.all
     end

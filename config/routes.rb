@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get "auth/google_oauth2/callback", to: 'sessions#create', as: 'login'
+  get '/auth/google_oauth2?session_type=provider', to: 'sessions#create', as: 'login_provider'
+  get '/auth/google_oauth2?session_type=user', to: 'sessions#create', as: 'login_user'
 
   root "home#show"
   resources :home, only: [:show]
@@ -7,7 +9,7 @@ Rails.application.routes.draw do
   resources :users
   resources :providers
   resources :auth, only: [:show]
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:create, :destroy]
 
   namespace :api do
     namespace :v1 do

@@ -14,8 +14,8 @@ class ProvidersController < ApplicationController
   end
 
   def create
-    binding.pry
     @info = session[:auth]["info"]
+    binding.pry
     @provider = Provider.new(oauth_uid: session[:auth]["uid"])
     @provider.name = @info["name"]
     @provider.email = @info["email"]
