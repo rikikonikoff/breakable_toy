@@ -10,12 +10,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    if session[:user_id]
+    if current_user
       session[:user_id] = nil
-    elsif session[:provider_id]
       session[:provider_id] = nil
+      session[:auth] = nil
     end
-    session[:auth] = nil
     flash[:notice] = "Signed Out"
     redirect_to root_path
   end
