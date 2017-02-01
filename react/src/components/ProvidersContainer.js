@@ -1,3 +1,5 @@
+/* eslint no-console: off */
+
 import React, { Component } from 'react';
 import Provider from './Provider';
 
@@ -5,10 +7,11 @@ class ProvidersContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      providers: []
+      providers: [],
+      selectedProviderId: null
     };
     this.fetchData = this.fetchData.bind(this);
-
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount(){
@@ -33,8 +36,17 @@ class ProvidersContainer extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  handleClick(id) {
+    if (id === this.state.selectedProviderId) {
+      this.setState({ selectedProviderId: null });
+    } else {
+      this.setState({ selectedProviderId: id });
+    }
+  }
+
   render(){
     let providers = this.state.providers.map(provider => {
+
       return(
         <Provider
         key = {provider.id}
@@ -46,15 +58,15 @@ class ProvidersContainer extends Component {
         state = {provider.state}
         zip = {provider.zip}
         bio = {provider.bio}
+        appointments = {provider.appointments}
+        handleClick = {this.handleClick}
+        selectedProviderId = {this.state.selectedProviderId}
         />
       );
     });
 
     return(
-      <div>
-      hiya
-      {providers}
-      </div>
+      <div>{providers}</div>
     );
   }
 }
