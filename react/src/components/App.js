@@ -11,7 +11,7 @@ class App extends Component {
 
   render(){
     let providersContainer = <ProvidersContainer />;
-    
+
     return(
       <div>
       {providersContainer}

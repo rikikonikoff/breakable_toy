@@ -8,15 +8,19 @@ class ProvidersContainer extends Component {
     super(props);
     this.state = {
       providers: [],
-      selectedProviderId: null
+      selectedProviderId: null,
+      currentUserId: null,
+      currentUserName: null
     };
     this.fetchData = this.fetchData.bind(this);
+    // this.fetchCurrentUser = this.fetchCurrentUser.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount(){
     this.fetchData();
     setInterval(this.fetchData, 6000);
+    // this.fetchCurrentUser();
   }
 
   fetchData(){
@@ -35,6 +39,18 @@ class ProvidersContainer extends Component {
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
+
+  // fetchCurrentUser() {
+  //   fetch('/api/v1/providers/1')
+  //   .then(response => {
+  //     if(response.ok) {
+  //       return response.json();
+  //     }
+  //   })
+  //   .then(user => {
+  //     this.setState({ currentUserId: user["id"], currentUserName: user["name"] });
+  //   });
+  // }
 
   handleClick(id) {
     if (id === this.state.selectedProviderId) {
@@ -59,6 +75,8 @@ class ProvidersContainer extends Component {
         zip = {provider.zip}
         bio = {provider.bio}
         appointments = {provider.appointments}
+        currentUserId = {this.state.currentUserId}
+        currentUserName = {this.state.currentUserName}
         handleClick = {this.handleClick}
         selectedProviderId = {this.state.selectedProviderId}
         />

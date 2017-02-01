@@ -10,4 +10,8 @@ class Api::V1::ProvidersController < ApplicationController
 
     render json: @providers
   end
+
+  def show
+    render json: current_user
+  end
 end
