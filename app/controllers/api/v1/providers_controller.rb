@@ -3,11 +3,9 @@ class Api::V1::ProvidersController < ApplicationController
 
   def index
     @providers = Provider.all
-
     if params[:search]
       @providers = Provider.search(params[:search])
     end
-
     render json: @providers
   end
 
