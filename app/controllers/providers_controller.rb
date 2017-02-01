@@ -39,8 +39,8 @@ class ProvidersController < ApplicationController
   end
 
   def update
-    @provider = Provider.find(provider_params)
-    if @provider.update
+    @provider = Provider.find(params[:id])
+    if @provider.update(provider_params)
       flash[:notice] = "Profile Updated Successfully"
       redirect_to @provider
     else
@@ -57,8 +57,7 @@ class ProvidersController < ApplicationController
   private
 
   def provider_params
-    params.require[:provider].permit[
-      :id,
+    params.require(:provider).permit(
       :name,
       :email,
       :work_address,
@@ -67,6 +66,6 @@ class ProvidersController < ApplicationController
       :zip,
       :bio,
       :profile_url
-    ]
+    )
   end
 end
