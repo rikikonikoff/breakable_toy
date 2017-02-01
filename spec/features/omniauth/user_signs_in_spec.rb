@@ -21,8 +21,11 @@ RSpec.feature "user signs in" do
 
   xscenario "it logs in an existing user" do
     User.destroy_all
-    user = User.create(name: 'Purple People Eater',
-    email: 'purplepeopleeater@gmail.com', uid: '123545')
+    user = User.create(
+      name: 'Purple People Eater',
+      email: 'purplepeopleeater@gmail.com',
+      uid: '123545'
+    )
     visit root_path
     click_link 'User Sign In'
     request.env['omniauth.auth'] = OmniAuth.config.mock_auth

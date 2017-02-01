@@ -7,7 +7,6 @@ RSpec.describe Api::V1::ProvidersController, type: :controller do
     let!(:provider_2) { FactoryGirl.create(:provider) }
     let!(:appointment) { FactoryGirl.create(:appointment, provider: provider) }
 
-
     it "returns http success" do
       get :index
       expect(response).to have_http_status(:success)
@@ -39,7 +38,6 @@ RSpec.describe Api::V1::ProvidersController, type: :controller do
       user_login_google(user.password)
       get :show
       json = JSON.parse(response.body)
-      binding.pry
     end
   end
 
