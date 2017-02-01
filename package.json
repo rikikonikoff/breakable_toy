@@ -50,7 +50,8 @@
     "redux-form": "^5.2.3",
     "redux-thunk": "^2.1.0",
     "webpack": "^1.13.0",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "rc-calendar": "^7.6.1"
   },
   "homepage": "https://github.com/rikikonikoff/breakable_toy#readme",
   "eslintConfig": {

@@ -5,22 +5,31 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
-# Requires supporting ruby files with custom matchers and macros, etc, in
-# spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
-# run as spec files by default. This means that files in spec/support that end
-# in _spec.rb will both be required and run as specs, causing the specs to be
-# run twice. It is recommended that you do not name files matching this glob to
-# end with _spec.rb. You can configure this pattern with the --pattern
-# option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
-#
 # The following line is provided for convenience purposes. It has the downside
 # of increasing the boot-up time by auto-requiring all files in the support
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
+OmniAuth.config.test_mode = true
+omniauth_hash = {
+  provider: 'google_oauth2',
+  uid: '123545',
+  info: {
+    name: 'Purple People Eater',
+    email: 'purplepeopleeater@gmail.com'
+  },
+  credentials: {
+    token:
+    "ya29.GlzkA7eqFoceHF1yIDT_IvOdNQa684fjj8F5xsd7XntsKXTP2W0YF5KFIpEaIaUsvDqnwGihjPZuorVu6z9MQ9BMqBq0mxzPBVMN4VYUXqvY3jt1MUOgjyTA5Hv5gA",
+    expires_at: 1354920555
+  }
+}
+OmniAuth.config.add_mock(:google_oath2, omniauth_hash)
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -34,20 +43,6 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
-
-  # RSpec Rails can automatically mix in different behaviours to your tests
-  # based on their file location, for example enabling you to call `get` and
-  # `post` in specs under `spec/controllers`.
-  #
-  # You can disable this behaviour by removing the line below, and instead
-  # explicitly tag your specs with their type, e.g.:
-  #
-  #     RSpec.describe UsersController, :type => :controller do
-  #       # ...
-  #     end
-  #
-  # The different available types are documented in the features, such as in
-  # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
   # Filter lines from Rails gems in backtraces.
@@ -61,4 +56,3 @@ require "valid_attribute"
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 end
-

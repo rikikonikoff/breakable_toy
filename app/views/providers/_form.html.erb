@@ -1,0 +1,35 @@
+<%= form_for @provider do |f| %>
+  <p>
+    <%= f.label :name, "Your Full Name" %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :work_address, "Work Address" %>
+    <%= f.text_field :work_address %>
+  </p>
+  <p>
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <%= f.label :state %>
+    <%= f.select :state, options_for_select(us_states) %>
+  </p>
+  <p>
+    <%= f.label :zip %>
+    <%= f.text_field :zip %>
+  </p>
+  <p>
+    <%= f.label :profile_url, "Add a link to your external profile" %>
+    <%= f.text_field :profile_url %>
+  </p>
+  <p>
+    <%= f.label :bio, "Tell us about yourself:" %>
+    <%= f.text_area :bio %>
+  </p>
+  <p><%= f.submit "Submit Changes" %></p>
+<% end %>
