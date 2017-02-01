@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.feature "user signs out" do
+RSpec.feature "provider adds an appointment" do
   pending "add some examples to (or delete) #{__FILE__}"
 end

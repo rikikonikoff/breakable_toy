@@ -31,8 +31,42 @@ class ProvidersController < ApplicationController
     end
   end
 
+  def edit
+    @provider = nil
+    if signed_in_provider
+      @provider = current_user
+    end
+  end
+
+  def update
+    @provider = Provider.find(provider_params)
+    if @provider.update
+      flash[:notice] = "Profile Updated Successfully"
+      redirect_to @provider
+    else
+      flash[:notice] = @provider.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
   def destroy
     @provider = Provider.find(params[:id])
     @provider.destroy
+  end
+
+  private
+
+  def provider_params
+    params.require[:provider].permit[
+      :id,
+      :name,
+      :email,
+      :work_address,
+      :city,
+      :state,
+      :zip,
+      :bio,
+      :profile_url
+    ]
   end
 end

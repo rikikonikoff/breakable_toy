@@ -12,6 +12,6 @@ class Api::V1::ProvidersController < ApplicationController
   end
 
   def show
-    render json: current_user
+    render json: [current_user]
   end
 end

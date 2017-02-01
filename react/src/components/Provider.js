@@ -6,6 +6,12 @@ const Provider = props => {
     props.handleClick(props.id);
   };
 
+  let showEditLink;
+  let edit_path = `/providers/${props.id}/edit`;
+  if(props.currentUserId === props.id && props.currentUserName === props.name) {
+    showEditLink = <a href={edit_path}>Edit My Profile</a>;
+  }
+
   let showDetails;
   if(props.selectedProviderId === props.id) {
     showDetails = <div>
@@ -17,23 +23,14 @@ const Provider = props => {
       <p>{props.bio}</p>
       <h5>Appointments</h5>
       <p>{props.appointments}</p>
+      <p>{showEditLink}</p>
     </div>;
-  }
-
-
-  let currentUserId = props.currentUserId;
-  let currentUserName = props.currentUserName;
-  let showEditLink;
-  let edit_path = `/providers/${props.id}/edit`;
-  if(props.selectedProviderId === props.id && currentUserId === props.id && currentUserName === props.name) {
-    showEditLink = <a href={edit_path}>Edit My Profile</a>;
   }
 
   return(
     <div>
       <h3 onClick={handleClick}>{props.name}</h3>
       {showDetails}
-      {showEditLink}
     </div>
   );
 };

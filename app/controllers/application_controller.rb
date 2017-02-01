@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_user
+  helper_method :current_user, :signed_in_user, :signed_in_provider
 
   def signed_in_user
     !session[:user_id].nil?

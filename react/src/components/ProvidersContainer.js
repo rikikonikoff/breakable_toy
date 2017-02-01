@@ -13,14 +13,13 @@ class ProvidersContainer extends Component {
       currentUserName: null
     };
     this.fetchData = this.fetchData.bind(this);
-    // this.fetchCurrentUser = this.fetchCurrentUser.bind(this);
+    this.fetchCurrentUser = this.fetchCurrentUser.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount(){
     this.fetchData();
-    setInterval(this.fetchData, 6000);
-    // this.fetchCurrentUser();
+    this.fetchCurrentUser();
   }
 
   fetchData(){
@@ -37,20 +36,27 @@ class ProvidersContainer extends Component {
     .then(data => {
       this.setState({ providers: data });
     })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
+    .catch(error => console.error(`Error in providers fetch: ${error.message}`));
   }
 
-  // fetchCurrentUser() {
-  //   fetch('/api/v1/providers/1')
-  //   .then(response => {
-  //     if(response.ok) {
-  //       return response.json();
-  //     }
-  //   })
-  //   .then(user => {
-  //     this.setState({ currentUserId: user["id"], currentUserName: user["name"] });
-  //   });
-  // }
+  fetchCurrentUser() {
+    fetch('/api/v1/providers/1', {
+      credentials: 'same-origin'
+    })
+    .then(response => {
+      if(response.ok) {
+        return response.json();
+      } else {
+        let errorMessage = `${response.status}, (${response.statusText})`;
+        let error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(data => {
+      this.setState({ currentUserId: data[0]["id"], currentUserName: data[0]["name"] });
+    })
+    .catch(error => console.error(`Error in current user fetch: ${error.message}`));
+  }
 
   handleClick(id) {
     if (id === this.state.selectedProviderId) {
@@ -62,7 +68,6 @@ class ProvidersContainer extends Component {
 
   render(){
     let providers = this.state.providers.map(provider => {
-
       return(
         <Provider
         key = {provider.id}
