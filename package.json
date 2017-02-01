@@ -52,5 +52,22 @@
     "webpack": "^1.13.0",
     "bootstrap": "^3.3.7"
   },
-  "homepage": "https://github.com/rikikonikoff/breakable_toy#readme"
+  "homepage": "https://github.com/rikikonikoff/breakable_toy#readme",
+  "eslintConfig": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "globalReturn": true,
+      "impliedStrict": true,
+      "jsx": true
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "commonjs": true,
+      "es6": true,
+      "amd": true,
+      "jquery": true
+    },
+    "no-console": "off"
+  }
 }
