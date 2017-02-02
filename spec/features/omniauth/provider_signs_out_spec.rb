@@ -9,7 +9,7 @@ RSpec.feature "provider signs out" do
   scenario "it destroys the session" do
     visit root_path
     click_link "Sign Out"
-    expect{session}.to raise_error(NameError)
+    expect { session }.to raise_error(NameError)
   end
 
   scenario "it redirects to the home page" do

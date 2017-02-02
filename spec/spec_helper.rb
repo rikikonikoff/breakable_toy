@@ -7,11 +7,11 @@ OmniAuth.config.test_mode = true
 
 def sign_in_user(uid = '123545')
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-  provider: 'google_oauth2',
-  uid: uid,
-  info: {
-    name: 'Purple People Eater',
-    email: 'purplepeopleeater@gmail.com'
+    provider: 'google_oauth2',
+    uid: uid,
+    info: {
+      name: 'Purple People Eater',
+      email: 'purplepeopleeater@gmail.com'
     }
   })
   visit('/auth/google_oauth2?session_type=user')
@@ -19,11 +19,11 @@ end
 
 def sign_in_provider(uid = '123545')
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-  provider: 'google_oauth2',
-  uid: uid,
-  info: {
-    name: 'Purple People Eater',
-    email: 'purplepeopleeater@gmail.com'
+    provider: 'google_oauth2',
+    uid: uid,
+    info: {
+      name: 'Purple People Eater',
+      email: 'purplepeopleeater@gmail.com'
     }
   })
   visit('/auth/google_oauth2?session_type=provider')
