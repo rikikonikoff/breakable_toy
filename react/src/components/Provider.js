@@ -13,6 +13,11 @@ const Provider = props => {
     showEditLink = <a href={edit_path}>Edit My Profile</a>;
   }
 
+  let showAddress;
+  if(props.address !== null) {
+    showAddress = <p> {props.address}, {props.city}, {props.state} {props.zip}</p>;
+  }
+
   // let appointments = props.appointments.map(appointment => {
   //   return(
   //     <Appointment
@@ -33,20 +38,20 @@ const Provider = props => {
   if(props.selectedProviderId === props.id) {
     showDetails = <div>
       <p>{props.email}</p>
-      <p>{props.work_address}</p>
-      <p>{props.city}</p>
-      <p>{props.state}</p>
-      <p>{props.zip}</p>
+      {showAddress}
       <p>{props.bio}</p>
-      <h5><a href={appointmentsPath}>See More</a></h5>
-      <p>{showEditLink}</p>
+      <h5><a href={appointmentsPath}>See My Appointments</a></h5>
+      <p> {showEditLink}</p>
+      <br/>
     </div>;
   }
 
   return(
-    <div>
-      <h3 onClick={handleClick}>{props.name}</h3>
-      {showDetails}
+    <div id="providerCard" className="card col-sm-4">
+      <div className="card-block">
+        <h3 className="card-title" onClick={handleClick}>{props.name}</h3>
+        {showDetails}
+      </div>
     </div>
   );
 };

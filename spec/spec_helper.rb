@@ -18,17 +18,17 @@ OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
 })
 
 def user_login_test
-  OmniAuth.config.add_mock(:google_oauth2, {
-    uid: '12345',
-    info: {
-      name: 'Purple People Eater',
-      email: 'purplepeopleeater@gmail.com'
+  authHash = {
+    "uid" => '12345',
+    "info" => {
+      "name" => 'Purple People Eater',
+      "email" => 'purplepeopleeater@gmail.com'
       }
-    })
-  visit '/auth/google_oauth2?session_type=user'
-  binding.pry
-  request.env['omniauth.env'] = OmniAuth.config.mock_auth[:google_oauth2]
-  get '/auth/google_oauth2?session_type=user/callback'
+    }
+  OmniAuth.config.add_mock(:google_oauth2, authHash)
+  OmniAuth.config.mock_auth[:google_oauth2]
+  request.env.merge!("omniauth.auth" => authHash)
+  request.env.merge!("omniauth.params" => { "session_type" => "user" })
 end
 
 def provider_login_test
@@ -39,7 +39,7 @@ def provider_login_test
       email: 'purplepeopleeater@gmail.com'
       }
     })
-  get '/auth/google_oauth2?session_type=provider'
+  get login_provider_path
   request.env['omniauth.env'] = OmniAuth.config.mock_auth[:google_oauth2]
   get '/auth/google_oauth2?session_type=provider/callback'
 end

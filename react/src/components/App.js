@@ -25,9 +25,14 @@ class App extends Component {
                               searchTerm = {this.state.searchTerm}
                              />;
     return(
-      <div>
-      {search}
-      {providersContainer}
+      <div className="container-fluid">
+        <div className="row">
+          <h1 className="col-sm-4">Providers</h1>
+        </div>
+        <div className="row">
+          <div className="col-sm-4">{search}</div>
+        </div>
+        <div>{providersContainer}</div>
       </div>
     );
   }
