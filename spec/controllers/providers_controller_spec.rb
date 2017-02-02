@@ -6,7 +6,7 @@ RSpec.describe ProvidersController, type: :controller do
 
     it "returns http success" do
       provider = FactoryGirl.create(:provider)
-      put :update, id: provider.id
+      put :update, provider: {id: provider.id}
       expect(response).to have_http_status(:success)
     end
   end
