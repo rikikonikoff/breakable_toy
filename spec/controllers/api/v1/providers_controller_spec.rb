@@ -26,17 +26,17 @@ RSpec.describe Api::V1::ProvidersController, type: :controller do
     end
   end
 
-  xdescribe "#show" do
+  describe "#show" do
     let!(:user) { FactoryGirl.create(:user) }
 
     it "returns http success" do
-      get :show
+      get :show, id: user.id
       expect(response).to have_http_status(:success)
     end
 
     it "shows json for the current user" do
-      user_login_google(user.password)
-      get :show
+      current_user = user
+      get :show, id: user.id
       json = JSON.parse(response.body)
     end
   end

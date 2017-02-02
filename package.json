@@ -67,7 +67,8 @@
       "commonjs": true,
       "es6": true,
       "amd": true,
-      "jquery": true
+      "jquery": true,
+      "phantomjs": true
     },
     "no-console": "off"
   }
