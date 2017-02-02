@@ -10,6 +10,7 @@ gem 'omniauth'
 gem 'gmail'
 gem 'omniauth-google-oauth2'
 gem 'active_model_serializers'
+gem 'validates_email_format_of'
 
 group :test do
   gem 'coveralls', require: false

@@ -3,7 +3,11 @@
 <ul style="list-style: none;">
   <% @appointments.each do |a| %>
     <li>
-      <%= link_to "#{a.date} @ #{a.start_time}", appointment_path(a) %>
+      <%= link_to "#{a.date.strftime("%a %B %d, %Y")} @ #{a.start_time.strftime("%I:%M%p")}", appointment_path(a) %>
     </li>
   <% end %>
 </ul>
+
+<% if signed_in_provider %>
+  <%= link_to "Add an Appointment", new_appointment_path %>
+<% end %>
