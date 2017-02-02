@@ -12,9 +12,9 @@
   <ul style="list-style: none;">
     <% @appointments.each do |appointment| %>
       <li>
-        <%= appointment.date %>
-        <%= appointment.start_time %>
-        <%= appointment.end_time %>
+        <%= appointment.date.strftime("%a, %B %d %Y") %>:
+        <%= appointment.start_time.strftime("%I:%M%p") %> -
+        <%= appointment.end_time.strftime("%I:%M%p") %>
       </li>
     <% end %>
   </ul>

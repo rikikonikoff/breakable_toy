@@ -1,7 +1,18 @@
 <div>
   <p>
-    Appointment with <%= @provider.name %> at <%= @appointment.start_time %> on <%= @appointment.date %>
+    Appointment with <%= @provider.name %> at <%= @appointment.start_time.strftime("%I:%M%p") %> on <%= @appointment.date.strftime("%a %B %d, %Y") %>
+  </p>
+  <p>
+    Address: <%= @provider.work_address %> <%= @provider.city %> <%= @provider.state %>, <%= @provider.zip %>
   </p>
   <p>Booked: <%= @appointment.booked? %></p>
-  <p><%= @booking_button %></p>
+  <p>
+    <% if signed_in_user %>
+      <% if @appointment.booked? && @appointment.user == current_user %>
+        <%= button_to "Cancel Booking", appointment_path(@appointment), method: :patch %>
+      <% elsif !@appointment.booked? %>
+        <%= button_to "Book Appointment", appointment_path(@appointment), method: :patch %>
+      <% end %>
+    <% end %>
+  </p>
 </div>

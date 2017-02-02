@@ -10,11 +10,6 @@ class AppointmentsController < ApplicationController
   def show
     @appointment = Appointment.find(params[:id])
     @provider = @appointment.provider
-    if @appointment.booked? && @appointment.user == current_user
-      @booking_button = button_tag "Cancel Booking", onClick: @appointment.unbook!
-    elsif !@appointment.booked?
-      @booking_button = button_tag "Book Appointment", onClick: @appointment.book!
-    end
   end
 
   def new
@@ -34,7 +29,7 @@ class AppointmentsController < ApplicationController
       flash[:notice] = "Appointment Created"
       redirect_to @provider
     else
-      flash[:notice] = appointments.errors.full_messages.to_sentence
+      flash[:notice] = @appointment.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -46,13 +41,33 @@ class AppointmentsController < ApplicationController
 
   def update
     @appointment = Appointment.find(params[:id])
-    @provider = current_user
-    if @appointment.update
-      flash[:notice] = "Appointment Updated"
-      redirect_to @provider
-    else
-      flash[:notice] = appointments.errors.full_messages.to_sentence
-      render :edit
+    if signed_in_provider
+      @provider = current_user
+      if @appointment.update
+        flash[:notice] = "Appointment Updated"
+        redirect_to @provider
+      else
+        flash[:notice] = @appointment.errors.full_messages.to_sentence
+        render :edit
+      end
+    elsif signed_in_user
+      if @appointment.booked? && @appointment.user == current_user
+        @appointment.unbook!
+        if @appointment.update({user: nil, booked?: false})
+          flash[:notice] = "Appointment Canceled"
+          redirect_to @appointment
+        else
+          render :show
+        end
+      elsif !@appointment.booked?
+        @appointment.book!(current_user)
+        if @appointment.update({user: current_user, booked?: true})
+          flash[:notice] = "Appointment Booked!"
+          redirect_to @appointment
+        else
+          render :show
+        end
+      end
     end
   end
 
@@ -71,6 +86,11 @@ class AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.require[:appointment].permit[:date, :start_time, :end_time].merge[:provider]
+    params.require(:appointment).permit(
+      :date,
+      :start_time,
+      :end_time,
+      :booked?
+    )
   end
 end

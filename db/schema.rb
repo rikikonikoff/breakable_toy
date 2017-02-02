@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170131204755) do
+ActiveRecord::Schema.define(version: 20170201223030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,32 +29,28 @@ ActiveRecord::Schema.define(version: 20170131204755) do
   end
 
   create_table "providers", force: :cascade do |t|
-    t.string   "name",                                       null: false
-    t.string   "work_address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.text     "bio"
-    t.string   "profile_url"
-    t.string   "provider",         default: "google_oauth2"
-    t.string   "uid"
-    t.string   "oauth_token"
-    t.datetime "oauth_expires_at"
-    t.string   "email",                                      null: false
+    t.string "name",                                   null: false
+    t.string "work_address"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.text   "bio"
+    t.string "profile_url"
+    t.string "provider",     default: "google_oauth2"
+    t.string "uid"
+    t.string "email",                                  null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                                         null: false
-    t.string   "insurance_provider"
-    t.string   "address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.string   "provider",           default: "google_oauth2"
-    t.string   "uid"
-    t.string   "email"
-    t.string   "oauth_token"
-    t.datetime "oauth_expires_at"
+    t.string "name",                                         null: false
+    t.string "insurance_provider"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "provider",           default: "google_oauth2"
+    t.string "uid"
+    t.string "email"
   end
 
 end
