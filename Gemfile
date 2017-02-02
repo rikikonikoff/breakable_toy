@@ -1,4 +1,5 @@
 source 'https://rubygems.org/'
+ruby '2.3.1'
 
 gem 'rails', '~> 5.0.0'
 gem 'pg', '~> 0.18'
@@ -11,6 +12,8 @@ gem 'gmail'
 gem 'omniauth-google-oauth2'
 gem 'active_model_serializers'
 gem 'validates_email_format_of'
+gem 'bootstrap'
+gem 'sprockets-rails'
 
 group :test do
   gem 'coveralls', require: false
@@ -39,3 +42,7 @@ group :production do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.3.3'
+end
