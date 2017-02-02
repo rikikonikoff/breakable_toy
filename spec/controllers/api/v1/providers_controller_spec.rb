@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::ProvidersController, type: :controller do
 
   describe "#index" do
+    Provider.destroy_all
     let!(:provider) { FactoryGirl.create(:provider) }
     let!(:provider_2) { FactoryGirl.create(:provider) }
     let!(:appointment) { FactoryGirl.create(:appointment, provider: provider) }
