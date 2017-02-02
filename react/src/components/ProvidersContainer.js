@@ -67,6 +67,11 @@ class ProvidersContainer extends Component {
   }
 
   render(){
+    let searchTerm;
+    if (this.props.searchTerm !== ""){
+      searchTerm = this.props.searchTerm;
+    }
+    
     let providers = this.state.providers.map(provider => {
       return(
         <Provider
