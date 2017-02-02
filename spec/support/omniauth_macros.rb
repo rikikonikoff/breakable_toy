@@ -19,6 +19,7 @@ module OmniauthMacros
         }
       })
     visit '/auth/google_oauth2?session_type=user'
+    binding.pry
     request.env['omniauth.env'] = OmniAuth.config.mock_auth[:google]
     get '/auth/google_oauth2?session_type=user/callback'
   end

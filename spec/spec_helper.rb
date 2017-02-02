@@ -1,7 +1,11 @@
 require 'coveralls'
-Coveralls.wear!('rails')
 require 'omniauth'
 require 'omniauth-google-oauth2'
+require 'capybara/poltergeist'
+
+Coveralls.wear!('rails')
+
+Capybara.javascript_driver = :poltergeist
 
 OmniAuth.config.test_mode = true
 OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
@@ -22,6 +26,7 @@ def user_login_test
       }
     })
   visit '/auth/google_oauth2?session_type=user'
+  binding.pry
   request.env['omniauth.env'] = OmniAuth.config.mock_auth[:google_oauth2]
   get '/auth/google_oauth2?session_type=user/callback'
 end
@@ -49,4 +54,12 @@ RSpec.configure do |config|
   end
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
+
+  # config.before(:suite) do
+  #   DatabaseCleaner.clean_with(:truncation)
+  # end
+  #
+  # config.before(:each) do
+  #   DatabaseCleaner.strategy = :transaction
+  # end
 end
