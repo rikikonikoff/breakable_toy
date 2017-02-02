@@ -33,8 +33,8 @@ class ProvidersContainer extends Component {
         throw(error);
       }
     })
-    .then(data => {
-      this.setState({ providers: data });
+    .then(providers => {
+      this.setState({ providers: providers });
     })
     .catch(error => console.error(`Error in providers fetch: ${error.message}`));
   }
@@ -67,12 +67,21 @@ class ProvidersContainer extends Component {
   }
 
   render(){
-    let searchTerm;
-    if (this.props.searchTerm !== ""){
-      searchTerm = this.props.searchTerm;
-    }
-    
-    let providers = this.state.providers.map(provider => {
+    let searchTerm = this.props.searchTerm;
+
+    let fitsSearchTerm = (provider) => {
+      if (searchTerm === "") {
+        return true;
+      } else {
+        return provider.name.toLowerCase().includes(searchTerm.toLowerCase())
+        || provider.zip && provider.zip === searchTerm
+        || provider.city && provider.city.toLowerCase().includes(searchTerm.toLowerCase());
+      }
+    };
+
+    let searchedProviders = this.state.providers.filter(fitsSearchTerm);
+
+    let providers = searchedProviders.map(provider => {
       return(
         <Provider
         key = {provider.id}
