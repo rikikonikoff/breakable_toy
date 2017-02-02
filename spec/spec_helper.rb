@@ -27,8 +27,8 @@ def user_login_test
     }
   OmniAuth.config.add_mock(:google_oauth2, authHash)
   OmniAuth.config.mock_auth[:google_oauth2]
-  request.env.merge!("omniauth.auth" => authHash)
-  request.env.merge!("omniauth.params" => { "session_type" => "user" })
+  request.env["omniauth.auth"] = authHash
+  request.env["omniauth.params"] = { "session_type" => "user" }
 end
 
 def provider_login_test
