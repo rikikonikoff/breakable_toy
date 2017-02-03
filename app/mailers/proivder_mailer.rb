@@ -11,7 +11,7 @@ class ProviderMailer < ApplicationMailer
   def cancellation_email(provider, appointment)
     @provider = provider
     @appointment = appointment
-    @url = appointment_path(@appointment)
+    @url  = appointment_path(@appointment)
     mail(to: @provider.email, subject: 'Your Appointment Was Cancelled By The Patient')
   end
 end
