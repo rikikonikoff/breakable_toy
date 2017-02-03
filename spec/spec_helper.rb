@@ -2,7 +2,9 @@ require 'coveralls'
 require 'omniauth'
 require 'omniauth-google-oauth2'
 require 'capybara/poltergeist'
+require "simplecov"
 
+SimpleCov.start
 Coveralls.wear!('rails')
 
 Capybara.javascript_driver = :poltergeist

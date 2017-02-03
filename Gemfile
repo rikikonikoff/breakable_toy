@@ -18,6 +18,8 @@ gem 'sendgrid'
 
 group :test do
   gem 'coveralls', require: false
+  gem "simplecov"
+  gem "codeclimate-test-reporter", "~> 1.0.0"
 end
 
 group :development do
