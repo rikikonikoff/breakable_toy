@@ -42,34 +42,46 @@ class AppointmentsController < ApplicationController
   def update
     @appointment = Appointment.find(params[:id])
     if signed_in_provider
-      @provider = current_user
-      if @appointment.update
-        flash[:notice] = "Appointment Updated"
-        redirect_to @provider
-      else
-        flash[:notice] = @appointment.errors.full_messages.to_sentence
-        render :edit
-      end
+      change_appt
     elsif signed_in_user
       if @appointment.booked? && @appointment.user == current_user
-        @appointment.unbook!
-        if @appointment.update({user: nil, booked?: false})
-          flash[:notice] = "Appointment Canceled"
-          ProviderMailer.cancellation_email(@appointment).deliver_now
-          redirect_to @appointment
-        else
-          render :show
-        end
+        unbook_appt
       elsif !@appointment.booked?
-        @appointment.book!(current_user)
-        if @appointment.update({user: current_user, booked?: true})
-          flash[:notice] = "Appointment Booked!"
-          ProviderMailer.booking_email(@appointment).deliver_now
-          redirect_to @appointment
-        else
-          render :show
-        end
+        book_appt
       end
+    end
+  end
+
+  def change_appt
+    @provider = current_user
+    if @appointment.update
+      flash[:notice] = "Appointment Updated"
+      redirect_to @provider
+    else
+      flash[:notice] = @appointment.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
+  def book_appt
+    @appointment.book!(current_user)
+    if @appointment.update({ user: current_user, booked?: true })
+      flash[:notice] = "Appointment Booked!"
+      ProviderMailer.booking_email(@appointment).deliver_now
+      redirect_to @appointment
+    else
+      render :show
+    end
+  end
+
+  def unbook_appt
+    @appointment.unbook!
+    if @appointment.update({ user: nil, booked?: false })
+      flash[:notice] = "Appointment Canceled"
+      ProviderMailer.cancellation_email(@appointment).deliver_now
+      redirect_to @appointment
+    else
+      render :show
     end
   end
 

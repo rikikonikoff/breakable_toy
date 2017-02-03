@@ -15,7 +15,8 @@ index e69de29..0b3394d 100644
 +    enabled: true
 +    config:
 +      languages:
-+      - ruby
++      - ruby:
+          mass_threshold: 21
 +      - javascript
 +      - python
 +      - php
