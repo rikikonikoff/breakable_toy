@@ -1,7 +1,11 @@
 require 'coveralls'
-require 'capybara/poltergeist'
 require 'omniauth'
 require 'omniauth-google-oauth2'
+require 'capybara/poltergeist'
+
+Coveralls.wear!('rails')
+
+Capybara.javascript_driver = :poltergeist
 
 OmniAuth.config.test_mode = true
 
