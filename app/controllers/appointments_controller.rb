@@ -36,50 +36,50 @@ class AppointmentsController < ApplicationController
 
   def edit
     @appointment = Appointment.find(params[:id])
-    @provider = current_provider
+    @provider = current_user
   end
 
   def update
     @appointment = Appointment.find(params[:id])
     if signed_in_provider
-      change_appt
+      change_appt(@appointment)
     elsif signed_in_user
       if @appointment.booked? && @appointment.user == current_user
-        unbook_appt
+        unbook_appt(@appointment)
       elsif !@appointment.booked?
-        book_appt
+        book_appt(@appointment)
       end
     end
   end
 
-  def change_appt
+  def change_appt(appointment)
     @provider = current_user
-    if @appointment.update
+    if appointment.update(appointment_params)
       flash[:notice] = "Appointment Updated"
       redirect_to @provider
     else
-      flash[:notice] = @appointment.errors.full_messages.to_sentence
+      flash[:notice] = appointment.errors.full_messages.to_sentence
       render :edit
     end
   end
 
-  def book_appt
-    @appointment.book!(current_user)
-    if @appointment.update({ user: current_user, booked?: true })
+  def book_appt(appointment)
+    appointment.book!(current_user)
+    if appointment.update({ user: current_user, booked?: true })
       flash[:notice] = "Appointment Booked!"
-      ProviderMailer.booking_email(@appointment).deliver_now
-      redirect_to @appointment
+      ProviderMailer.booking_email(appointment).deliver_now
+      redirect_to appointment_path(appointment)
     else
       render :show
     end
   end
 
-  def unbook_appt
-    @appointment.unbook!
-    if @appointment.update({ user: nil, booked?: false })
+  def unbook_appt(appointment)
+    appointment.unbook!
+    if appointment.update({ user: nil, booked?: false })
       flash[:notice] = "Appointment Canceled"
-      ProviderMailer.cancellation_email(@appointment).deliver_now
-      redirect_to @appointment
+      ProviderMailer.cancellation_email(appointment).deliver_now
+      redirect_to appointment_path(appointment)
     else
       render :show
     end

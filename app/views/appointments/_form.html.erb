@@ -1,14 +1,14 @@
 <ul style="list-style: none;" >
   <%= form_for @appointment do |f| %>
-    <li>
+    <li class="date-select">
       <%= f.label :date %>
       <%= date_select :appointment, :date, start_year: Date.today.year, end_year: 3.years.from_now.year %>
     </li>
-    <li>
+    <li class="start-time-select">
       <%= f.label :start_time %>
       <%= time_select :appointment, :start_time, ampm: true, minute_step: 15 %>
     </li>
-    <li>
+    <li class="end-time-select">
       <%= f.label :end_time %>
       <%= time_select :appointment, :end_time, ampm: true, minute_step: 15  %>
     </li>
