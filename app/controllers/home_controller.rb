@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     @auth = session[:auth]
     if params[session_type: "provider"]
       @provider = Provider.from_omniauth(@auth)
-      redirect_to @provider
+      redirect_to provider_path(@provider)
     elsif params[session_type: "user"]
       @user = User.from_omniauth(@auth)
       redirect_to appointments_path
