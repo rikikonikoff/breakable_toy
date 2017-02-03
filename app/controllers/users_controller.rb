@@ -12,11 +12,11 @@ class UsersController < ApplicationController
   end
 
   def check_user_auth(user)
-    if @user.save
+    if user.save
       session[:auth].clear
-      session[:user_id] = @user.id
+      session[:user_id] = user.id
       flash[:notice] = "Signed in as #{@user.name}"
-      redirect_to @user
+      redirect_to user
     else
       flash[:notice] = "Couldn't sign in"
       redirect_to :back

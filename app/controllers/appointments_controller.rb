@@ -65,7 +65,7 @@ class AppointmentsController < ApplicationController
 
   def book_appt
     @appointment.book!(current_user)
-    if @appointment.update({user: current_user, booked?: true})
+    if @appointment.update({ user: current_user, booked?: true })
       flash[:notice] = "Appointment Booked!"
       ProviderMailer.booking_email(@appointment).deliver_now
       redirect_to @appointment
@@ -76,7 +76,7 @@ class AppointmentsController < ApplicationController
 
   def unbook_appt
     @appointment.unbook!
-    if @appointment.update({user: nil, booked?: false})
+    if @appointment.update({ user: nil, booked?: false })
       flash[:notice] = "Appointment Canceled"
       ProviderMailer.cancellation_email(@appointment).deliver_now
       redirect_to @appointment
