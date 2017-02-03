@@ -17,6 +17,5 @@ RSpec.feature "provider views appointments" do
   end
 
   scenario "provider views all appointments" do
-    
   end
 end
