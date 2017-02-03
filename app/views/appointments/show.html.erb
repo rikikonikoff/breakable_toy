@@ -18,6 +18,7 @@
   <p>
     <% if signed_in_provider && current_user == @provider %>
       <%= link_to "Edit this Appointment", edit_appointment_path(@appointment) %>
+      <%= link_to "Remove this Appointment", appointment_path(@appointment), method: :delete %>
     <% end %>
   </p>
 </div>

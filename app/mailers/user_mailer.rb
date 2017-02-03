@@ -1,10 +1,9 @@
 class UserMailer < ApplicationMailer
   default from: 'notifications@example.com'
 
-  def cancellation_email(user, appointment)
-    @user = user
+  def cancellation_email(appointment)
     @appointment = appointment
-    @url  = appointments_path
+    @user = @appointment.user
     mail(to: @user.email, subject: 'Your Appointment Was Cancelled By The Provider')
   end
 end
