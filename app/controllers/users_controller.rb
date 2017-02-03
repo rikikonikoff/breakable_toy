@@ -8,6 +8,10 @@ class UsersController < ApplicationController
     @user = User.new(uid: session[:auth]["uid"])
     @user.name = @info["name"]
     @user.email = @info["email"]
+    check_user_auth(@user)
+  end
+
+  def check_user_auth(user)
     if @user.save
       session[:auth].clear
       session[:user_id] = @user.id

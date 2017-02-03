@@ -18,6 +18,10 @@ class ProvidersController < ApplicationController
     @provider = Provider.new(oauth_uid: session[:auth]["uid"])
     @provider.name = @info["name"]
     @provider.email = @info["email"]
+    check_provider_auth(@provider)
+  end
+
+  def check_provider_auth(provider)
     if @provider.save
       session[:auth].clear
       session[:provider_id] = @provider.id
