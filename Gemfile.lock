@@ -63,6 +63,8 @@ GEM
     case_transform (0.2)
       activesupport
     cliver (0.3.2)
+    codeclimate-test-reporter (1.0.5)
+      simplecov
     coderay (1.1.1)
     concurrent-ruby (1.0.4)
     coveralls (0.8.19)
@@ -271,6 +273,7 @@ DEPENDENCIES
   active_model_serializers
   bootstrap
   capybara
+  codeclimate-test-reporter (~> 1.0.0)
   coveralls
   dotenv-rails
   factory_girl_rails
@@ -291,6 +294,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sendgrid
   shoulda
+  simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets-rails
