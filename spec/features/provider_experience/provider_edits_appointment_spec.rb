@@ -5,7 +5,10 @@ RSpec.feature "provider edits an existing appointment" do
     provider = FactoryGirl.create(:provider)
     appointment = FactoryGirl.create(:appointment, provider: provider)
     sign_in_provider(provider.uid)
-    click_link "#{appointment.date.strftime("%a, %B %d %Y")}: #{appointment.start_time.strftime("%I:%M%p")} - #{appointment.end_time.strftime("%I:%M%p")}"
+    @link = "#{appointment.date.strftime("%a, %B %d %Y")}:"
+    @link += " #{appointment.start_time.strftime("%I:%M%p")} - "
+    @link += "#{appointment.end_time.strftime("%I:%M%p")}"
+    click_link @link
     click_link "Edit this Appointment"
 
     within("#appointment_date_1i") do
