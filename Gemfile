@@ -14,6 +14,7 @@ gem 'active_model_serializers'
 gem 'validates_email_format_of'
 gem 'bootstrap'
 gem 'sprockets-rails'
+gem 'sendgrid'
 
 group :test do
   gem 'coveralls', require: false
