@@ -21,8 +21,6 @@ class ProvidersController < ApplicationController
     if @provider.save
       session[:auth].clear
       session[:provider_id] = @provider.id
-      @provider.touch :last_signed_in_at
-      @provider.increment! :sign_in_count
       flash[:notice] = "Signed in as #{@provider.name}"
       redirect_to @provider
     else
