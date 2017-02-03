@@ -10,7 +10,7 @@ index e69de29..0b3394d 100644
 +  bundler-audit:
 +    enabled: true
 +  csslint:
-+    enabled: true
++    enabled: false
 +  duplication:
 +    enabled: true
 +    config:
