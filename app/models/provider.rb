@@ -8,11 +8,11 @@ class Provider < ApplicationRecord
   validates_email_format_of :email
 
   def self.create_with_omniauth(auth)
-    create! do |p|
-      p.provider = auth.provider
-      p.uid = auth.uid
-      p.name = auth.info.name
-      p.email = auth.info.email
+    create! do |record|
+      record.provider = auth.provider
+      record.uid = auth.uid
+      record.name = auth.info.name
+      record.email = auth.info.email
     end
   end
 end
