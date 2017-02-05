@@ -29,6 +29,7 @@ Rails.application.configure do
   config.active_support.deprecation = :log
 
   config.active_record.migration_error = :page_load
+  config.active_record.time_zone_aware_types = [:datetime, :time]
 
   config.assets.debug = true
   config.assets.quiet = true

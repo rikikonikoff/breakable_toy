@@ -1,4 +1,6 @@
 class Appointment < ApplicationRecord
+  attr_accessor :user
+
   belongs_to :provider
   belongs_to :user, optional: true
 

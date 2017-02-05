@@ -5,7 +5,8 @@ RSpec.describe Api::V1::ProvidersController, type: :controller do
     Provider.destroy_all
     let!(:provider) { FactoryGirl.create(:provider) }
     let!(:provider_2) { FactoryGirl.create(:provider) }
-    let!(:appointment) { FactoryGirl.create(:appointment, provider: provider) }
+    let!(:user) { FactoryGirl.create(:user) }
+    let!(:appointment) { FactoryGirl.create(:appointment, provider: provider, user: user, booked?: true) }
 
     it "returns http success" do
       get :index
@@ -22,7 +23,7 @@ RSpec.describe Api::V1::ProvidersController, type: :controller do
 
       expect(json[0]["appointments"].length).to eq(1)
       expect(json[1]["appointments"].length).to eq(0)
-      expect(json[0]["users"][0]["id"]).to eq(appointment.user.id)
+      expect(json[0]["appointments"][0]["user_id"]).to eq(appointment.user_id)
     end
   end
 
@@ -30,13 +31,13 @@ RSpec.describe Api::V1::ProvidersController, type: :controller do
     let!(:user) { FactoryGirl.create(:user) }
 
     it "returns http success" do
-      get :show, id: user.id
+      get :show, params: { id: user.id }
       expect(response).to have_http_status(:success)
     end
 
     it "shows json for the current user" do
       current_user = user
-      get :show, id: user.id
+      get :show, params: { id: user.id }
       json = JSON.parse(response.body)
     end
   end

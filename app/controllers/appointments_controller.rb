@@ -36,19 +36,17 @@ class AppointmentsController < ApplicationController
 
   def edit
     @appointment = Appointment.find(params[:id])
-    @provider = current_user
+    @provider = @appointment.provider
   end
 
   def update
     @appointment = Appointment.find(params[:id])
     if signed_in_provider
       change_appt(@appointment)
-    elsif signed_in_user
-      if @appointment.booked? && @appointment.user == current_user
-        unbook_appt(@appointment)
-      elsif !@appointment.booked?
-        book_appt(@appointment)
-      end
+    elsif params[:option] == "unbook"
+      unbook_appt(@appointment)
+    elsif params[:option] == "book"
+      book_appt(@appointment, current_user)
     end
   end
 
@@ -63,9 +61,9 @@ class AppointmentsController < ApplicationController
     end
   end
 
-  def book_appt(appointment)
-    appointment.book!(current_user)
-    if appointment.update(user: current_user, booked?: true)
+  def book_appt(appointment, user)
+    appointment.book!(user)
+    if appointment.update!(user_id: user.id, booked?: true)
       flash[:notice] = "Appointment Booked!"
       ProviderMailer.booking_email(appointment).deliver_now
       redirect_to appointment_path(appointment)
@@ -76,8 +74,8 @@ class AppointmentsController < ApplicationController
 
   def unbook_appt(appointment)
     appointment.unbook!
-    if appointment.update(user: nil, booked?: false)
-      flash[:notice] = "Appointment Canceled"
+    if appointment.update!(user_id: nil, booked?: false)
+      flash[:notice] = "Appointment Cancelled"
       ProviderMailer.cancellation_email(appointment).deliver_now
       redirect_to appointment_path(appointment)
     else
@@ -107,7 +105,9 @@ class AppointmentsController < ApplicationController
       :date,
       :start_time,
       :end_time,
-      :booked?
+      :booked?,
+      :provider_id,
+      :user_id
     )
   end
 end
