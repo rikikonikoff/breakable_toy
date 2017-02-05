@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature "provider signs in" do
-  before(:each) do
-    Provider.destroy_all
-  end
-
   it 'signs in a provider' do
     sign_in_provider
     expect(page).to have_content("Sign Out")

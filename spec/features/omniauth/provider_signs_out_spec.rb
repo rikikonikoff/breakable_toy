@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.feature "provider signs out" do
   before do
-    Provider.destroy_all
     sign_in_provider
   end
 

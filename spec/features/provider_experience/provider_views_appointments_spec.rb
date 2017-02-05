@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature "provider views appointments" do
-  before(:each) do
-    Appointment.destroy_all
-    Provider.destroy_all
-  end
-
   let!(:provider) { FactoryGirl.create(:provider) }
   let!(:appointment_1) { FactoryGirl.create(:appointment, provider: provider) }
   let!(:appointment_2) { FactoryGirl.create(:appointment, provider: provider) }

@@ -2,6 +2,8 @@ class AppointmentsController < ApplicationController
   def index
     if session[:provider_id]
       @appointments = Appointment.where(provider: current_user)
+    elsif params[:id] && session[:user_id]
+      @appointments = Appointment.where(user: current_user)
     else
       @appointments = Appointment.all
     end
