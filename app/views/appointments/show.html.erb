@@ -8,10 +8,10 @@
   <p>Booked: <%= @appointment.booked? %></p>
   <p>
     <% if signed_in_user %>
-      <% if @appointment.booked? && @appointment.user == current_user %>
-        <%= button_to "Cancel Booking", appointment_path(@appointment), method: :patch %>
+      <% if @appointment.booked? && @appointment.user_id == current_user.id %>
+        <%= button_to "Cancel Booking", unbook_appointment_path(@appointment), method: :patch %>
       <% elsif !@appointment.booked? %>
-        <%= button_to "Book Appointment", appointment_path(@appointment), method: :patch %>
+        <%= button_to "Book Appointment", book_appointment_path(@appointment), method: :patch %>
       <% end %>
     <% end %>
   </p>

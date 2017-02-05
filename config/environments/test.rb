@@ -8,17 +8,19 @@ Rails.application.configure do
   }
 
   config.consider_all_requests_local       = true
+
   config.action_controller.perform_caching = false
+  config.action_controller.allow_forgery_protection = false
 
   config.action_dispatch.show_exceptions = false
 
-  config.action_controller.allow_forgery_protection = false
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :test
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
-
   config.active_support.deprecation = :stderr
+
+  config.active_record.time_zone_aware_types = [:datetime, :time]
 
   # config.action_view.raise_on_missing_translations = true
 end

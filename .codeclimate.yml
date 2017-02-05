@@ -1,3 +1,4 @@
+---
 engines:
   brakeman:
     enabled: true
@@ -6,11 +7,10 @@ engines:
   csslint:
     enabled: false
   duplication:
-    enabled: true
+    enabled: false
     config:
       languages:
-      - ruby:
-        mass_threshold: 30
+      - ruby
       - javascript
   eslint:
     enabled: true
@@ -20,7 +20,6 @@ engines:
     enabled: true
   rubocop:
     enabled: true
-
 ratings:
   paths:
   - app/**

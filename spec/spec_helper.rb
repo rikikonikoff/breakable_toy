@@ -8,6 +8,12 @@ SimpleCov.start
 Coveralls.wear!('rails')
 
 Capybara.javascript_driver = :poltergeist
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, {
+    js_errors: false,
+    debug: false
+  })
+end
 
 OmniAuth.config.test_mode = true
 
