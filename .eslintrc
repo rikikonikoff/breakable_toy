@@ -1,7 +1,9 @@
-ecmaFeatures:
-  modules: true
-  jsx: true
-  amd: true
+parserOptions:
+  sourceType: "module"
+  ecmaFeatures:
+    modules: true
+    jsx: true
+    amd: true
 
 env:
   amd: true
@@ -58,7 +60,7 @@ rules:
   no-case-declarations: 2
   no-div-regex: 2
   no-else-return: 0
-  no-empty-label: 2
+  no-label: 0
   no-empty-pattern: 2
   no-eq-null: 2
   no-eval: 2

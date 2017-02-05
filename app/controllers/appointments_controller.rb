@@ -7,6 +7,7 @@ class AppointmentsController < ApplicationController
     else
       @appointments = Appointment.all
     end
+    @appointments
   end
 
   def show

@@ -3,11 +3,14 @@ require 'rails_helper'
 RSpec.feature "user unbooks an appointment" do
   let!(:provider) { FactoryGirl.create(:provider) }
   let!(:user) { FactoryGirl.create(:user) }
-  let!(:appointment) { FactoryGirl.create(:appointment,
-    provider: provider,
-    booked?: true,
-    user_id: user.id
-  ) }
+  let!(:appointment) do
+    FactoryGirl.create(
+      :appointment,
+      provider: provider,
+      booked?: true,
+      user_id: user.id
+    )
+  end
 
   scenario "user cancels a booking" do
     sign_in_user(user.uid)

@@ -20,13 +20,19 @@ class SessionsController < ApplicationController
   end
 
   def create_provider
-    provider = Provider.find_by_provider_and_uid(@auth["provider"], @auth["uid"]) || Provider.create_with_omniauth(@auth)
+    provider = Provider.find_by_provider_and_uid(
+      @auth["provider"],
+      @auth["uid"]
+    ) || Provider.create_with_omniauth(@auth)
     session[:provider_id] = provider.id
     redirect_to provider_path(provider)
   end
 
   def create_user
-    user = User.find_by_provider_and_uid(@auth["provider"], @auth["uid"]) || User.create_with_omniauth(@auth)
+    user = User.find_by_provider_and_uid(
+      @auth["provider"],
+      @auth["uid"]
+    ) || User.create_with_omniauth(@auth)
     session[:user_id] = user.id
     redirect_to appointments_path
   end

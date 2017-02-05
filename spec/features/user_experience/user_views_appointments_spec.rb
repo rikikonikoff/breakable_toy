@@ -2,8 +2,12 @@ require 'rails_helper'
 
 RSpec.feature "user views appointments" do
   let!(:provider) { FactoryGirl.create(:provider) }
-  let!(:appointment) { FactoryGirl.create(:appointment, provider: provider, booked?: false) }
-  let!(:appointment_2) { FactoryGirl.create(:appointment, date: Date.tomorrow) }
+  let!(:appointment) do
+    FactoryGirl.create(:appointment, provider: provider, booked?: false)
+  end
+  let!(:appointment_2) do
+    FactoryGirl.create(:appointment, date: Date.tomorrow)
+  end
   let!(:user) { FactoryGirl.create(:user) }
 
   scenario "user views all appointments" do
