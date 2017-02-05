@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "user books an appointment" do
   let!(:provider) { FactoryGirl.create(:provider) }
-  let!(:appointment) { FactoryGirl.create(:appointment, provider: provider, booked?: false) }
+  let!(:appointment) do
+    FactoryGirl.create(:appointment, provider: provider, booked?: false)
+  end
   let!(:user) { FactoryGirl.create(:user) }
 
   scenario "user books appointment successfully" do

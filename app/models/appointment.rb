@@ -5,7 +5,7 @@ class Appointment < ApplicationRecord
   belongs_to :user, optional: true
 
   validates :provider_id, presence: true
-  validates :booked?, inclusion: { in: [ true, false ] }
+  validates :booked?, inclusion: { in: [true, false] }
   validates :date, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true

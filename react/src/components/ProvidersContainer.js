@@ -1,5 +1,3 @@
-/* eslint no-console: off */
-
 import React, { Component } from 'react';
 import Provider from './Provider';
 

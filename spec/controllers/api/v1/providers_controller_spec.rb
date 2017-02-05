@@ -6,7 +6,14 @@ RSpec.describe Api::V1::ProvidersController, type: :controller do
     let!(:provider) { FactoryGirl.create(:provider) }
     let!(:provider_2) { FactoryGirl.create(:provider) }
     let!(:user) { FactoryGirl.create(:user) }
-    let!(:appointment) { FactoryGirl.create(:appointment, provider: provider, user: user, booked?: true) }
+    let!(:appointment) do
+      FactoryGirl.create(
+        :appointment,
+        provider: provider,
+        user: user,
+        booked?: true
+      )
+    end
 
     it "returns http success" do
       get :index
