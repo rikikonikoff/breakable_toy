@@ -56,11 +56,19 @@ RSpec.configure do |config|
     OmniAuth.config.mock_auth[:google_oauth2] = nil
   end
 
-  # config.before(:suite) do
-  #   DatabaseCleaner.clean_with(:truncation)
-  # end
-  #
-  # config.before(:each) do
-  #   DatabaseCleaner.strategy = :transaction
-  # end
+  config.before(:suite) do
+    DatabaseCleaner.clean_with :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end

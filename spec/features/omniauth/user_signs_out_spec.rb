@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.feature "user signs out" do
   before do
-    User.destroy_all
     sign_in_user
   end
 

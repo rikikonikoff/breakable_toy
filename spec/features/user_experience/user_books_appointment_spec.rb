@@ -1,12 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature "user books an appointment" do
-  before do
-    User.destroy_all
-    Appointment.destroy_all
-    Provider.destroy_all
-  end
-
   let!(:provider) { FactoryGirl.create(:provider) }
   let!(:appointment) { FactoryGirl.create(:appointment, provider: provider, booked?: false) }
   let!(:user) { FactoryGirl.create(:user) }

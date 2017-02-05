@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature "user views appointments" do
-  before(:each) do
-    Appointment.destroy_all
-  end
-
   let!(:provider) { FactoryGirl.create(:provider) }
   let!(:appointment) { FactoryGirl.create(:appointment, provider: provider, booked?: false) }
   let!(:appointment_2) { FactoryGirl.create(:appointment, date: Date.tomorrow) }

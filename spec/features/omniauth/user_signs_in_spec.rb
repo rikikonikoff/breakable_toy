@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature "user signs in" do
-  before(:each) do
-    User.destroy_all
-  end
-
   it 'signs in a user' do
     sign_in_user
     expect(page).to have_content("Sign Out")

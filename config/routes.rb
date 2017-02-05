@@ -14,13 +14,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users do
-    resources :appointments, only: [:index]
-  end
-  
   resources :home, only: [:show]
   resources :appointments
   resources :providers
   resources :auth, only: [:show]
   resources :sessions, only: [:create, :destroy]
+  resources :users do
+    resources :appointments, only: [:index]
+  end
 end
