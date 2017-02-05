@@ -22,11 +22,11 @@ class ProvidersController < ApplicationController
   end
 
   def check_provider_auth(provider)
-    if @provider.save
+    if provider.save
       session[:auth].clear
-      session[:provider_id] = @provider.id
-      flash[:notice] = "Signed in as #{@provider.name}"
-      redirect_to @provider
+      session[:provider_id] = provider.id
+      flash[:notice] = "Signed in as #{provider.name}"
+      redirect_to provider
     else
       flash[:notice] = "Couldn't sign in"
       redirect_to :back
