@@ -13,6 +13,8 @@
       <% elsif !@appointment.booked? %>
         <%= button_to "Book Appointment", book_appointment_path(@appointment), method: :patch %>
       <% end %>
+      <br/>
+      <%= link_to "View My Booked Appointments", user_appointments_path(current_user) %>
     <% end %>
   </p>
   <p>

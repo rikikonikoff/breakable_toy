@@ -36,4 +36,15 @@ RSpec.feature "user views appointments" do
 
     expect(page).to have_content "Booked: false"
   end
+
+  scenario "user views own booked appointments" do
+    sign_in_user(user.uid)
+    @link = appointment.date.strftime("%a %B %d, %Y").to_s + " @ "
+    @link += appointment.start_time.strftime("%I:%M%p").to_s
+    click_link @link
+    click_button "Book Appointment"
+    click_link "View My Booked Appointments"
+
+    expect(page).to have_content @link
+  end
 end
