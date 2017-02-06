@@ -23,18 +23,6 @@ class ProvidersController < ApplicationController
     check_provider_auth(@provider)
   end
 
-  def check_provider_auth(provider)
-    if @provider.save
-      session[:auth].clear
-      session[:provider_id] = @provider.id
-      flash[:notice] = "Signed in as #{@provider.name}"
-      redirect_to @provider
-    else
-      flash[:notice] = "Couldn't sign in"
-      redirect_to :back
-    end
-  end
-
   def edit
     @provider = nil
     if signed_in_provider
@@ -50,6 +38,18 @@ class ProvidersController < ApplicationController
     else
       flash[:notice] = @provider.errors.full_messages.to_sentence
       render :edit
+    end
+  end
+
+  def check_provider_auth(provider)
+    if @provider.save
+      session[:auth].clear
+      session[:provider_id] = @provider.id
+      flash[:notice] = "Signed in as #{@provider.name}"
+      redirect_to @provider
+    else
+      flash[:notice] = "Couldn't sign in"
+      redirect_to :back
     end
   end
 

@@ -40,7 +40,7 @@ const Provider = props => {
       <p>{props.email}</p>
       {showAddress}
       <p>{props.bio}</p>
-      <h5><a href={appointmentsPath}>See My Appointments</a></h5>
+      <h5><a href={appointmentsPath}>Go to My Page</a></h5>
       <p> {showEditLink}</p>
       <br/>
     </div>;

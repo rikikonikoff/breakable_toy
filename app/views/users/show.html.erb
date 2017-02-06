@@ -1,0 +1,47 @@
+<h1><%= @user.name %></h1>
+<br/>
+<h3>
+  <%= @user.address %>
+  <%= @user.city %>
+  <%= @user.state %>
+  <%= @user.zip %>
+</h3>
+<br/>
+<div>
+  My Appointments
+  <ul style="list-style: none;">
+    <% @appointments.each do |appointment| %>
+      <li>
+        <a href="<%= appointment_path(appointment) %>">
+          Appointment with <%= appointment.provider.name %> on
+          <%= appointment.date.strftime("%a, %B %d %Y") %>:
+          <%= appointment.start_time.strftime("%I:%M%p") %> -
+          <%= appointment.end_time.strftime("%I:%M%p") %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+  <br/>
+  My Insurance
+  <ul style="list-style: none;">
+    <% @insurers.each do |insurance| %>
+      <li>
+          <%= insurance.company %> <%= insurance.plan %>
+          <% if current_user == @user %>
+            <%= link_to "(Remove)",
+              insurance_provider_path(InsuranceProvider.find_by(
+                insurer: insurance,
+                user: @user
+              )),
+              method: :delete %>
+          <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<br/>
+<% if current_user == @user %>
+  <%= link_to "Edit My Profile", edit_user_path(@user) %>
+  <p>Add your Insurance Provider:</p>
+  <%= render "insurers/form", insurer: @insurer %>
+<% end %>
