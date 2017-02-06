@@ -7,8 +7,11 @@
     "start": "npm run webpack -- --watch",
     "test": "node_modules/.bin/karma start react/karma.conf.js",
     "webpack": "node_modules/.bin/webpack --config ./react/webpack.config.js",
-    "webpack:deploy": "webpack --config=react/webpack.config.js -p",
+    "webpack:deploy": "webpack -p",
     "heroku-postbuild": "npm run webpack:deploy"
+  },
+  "engines": {
+    "node": "7.4.0"
   },
   "repository": {
     "type": "git",
