@@ -65,15 +65,20 @@ class ProvidersContainer extends Component {
   }
 
   render(){
-    let searchTerm = this.props.searchTerm;
+    let searchTerm = this.props.searchTerm.toLowerCase();
 
     let fitsSearchTerm = (provider) => {
+      let insurersArray = provider.insurers.map(insurer => {
+        return(`${insurer.company.toLowerCase()} ${insurer.plan.toLowerCase()}`)
+      })
+      let insurers = insurersArray.toString();
       if (searchTerm === "") {
         return true;
       } else {
-        return provider.name.toLowerCase().includes(searchTerm.toLowerCase())
+        return provider.name.toLowerCase().includes(searchTerm)
         || provider.zip && provider.zip === searchTerm
-        || provider.city && provider.city.toLowerCase().includes(searchTerm.toLowerCase());
+        || provider.city && provider.city.toLowerCase().includes(searchTerm)
+        || insurers.includes(searchTerm);
       }
     };
 
@@ -92,6 +97,7 @@ class ProvidersContainer extends Component {
         zip = {provider.zip}
         bio = {provider.bio}
         appointments = {provider.appointments}
+        insurers = {provider.insurers}
         currentUserId = {this.state.currentUserId}
         currentUserName = {this.state.currentUserName}
         handleClick = {this.handleClick}
