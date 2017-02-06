@@ -1,5 +1,4 @@
 import React from 'react';
-import Appointment from './Appointment';
 
 const Provider = props => {
   let url = `/providers/${props.id}`;
