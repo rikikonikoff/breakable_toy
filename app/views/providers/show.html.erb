@@ -8,7 +8,7 @@
 </h3>
 <br/>
 <div>
-  Appointments
+  My Appointments
   <ul style="list-style: none;">
     <% @appointments.each do |appointment| %>
       <li>
@@ -20,8 +20,27 @@
       </li>
     <% end %>
   </ul>
+  <br/>
+  Insurances I Accept
+  <ul style="list-style: none;">
+    <% @insurers.each do |insurance| %>
+      <li>
+          <%= insurance.company %> <%= insurance.plan %>
+          <% if current_user == @provider %>
+            <%= link_to "(Remove)",
+              insurance_provider_path(InsuranceProvider.find_by(
+                insurer: insurance,
+                provider: @provider
+              )),
+              method: :delete %>
+          <% end %>
+      </li>
+    <% end %>
+  </ul>
 </div>
 <br/>
 <% if current_user == @provider %>
   <%= link_to "Edit My Profile", edit_provider_path(@provider) %>
+  <p>Add an Insurance Provider that you accept:</p>
+  <%= render "insurers/form", insurer: @insurer %>
 <% end %>

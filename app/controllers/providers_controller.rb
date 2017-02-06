@@ -6,6 +6,8 @@ class ProvidersController < ApplicationController
   def show
     @provider = Provider.find(params[:id])
     @appointments = @provider.appointments
+    @insurers = @provider.insurers
+    @insurer = Insurer.new
   end
 
   def new
@@ -69,5 +71,9 @@ class ProvidersController < ApplicationController
       :bio,
       :profile_url
     )
+  end
+
+  def insurer_params
+    params.require(:insurer).permit(:company, :plan)
   end
 end
