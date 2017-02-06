@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_many :appointments
   has_many :providers, through: :appointments
 
+  has_many :insurance_providers
+  has_many :insurers, through: :insurance_providers
+
   validates :name, presence: true
   validates :email, presence: true
   validates :zip, numericality: true, length: { is: 5 }, allow_blank: true

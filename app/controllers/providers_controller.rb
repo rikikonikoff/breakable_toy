@@ -6,6 +6,8 @@ class ProvidersController < ApplicationController
   def show
     @provider = Provider.find(params[:id])
     @appointments = @provider.appointments
+    @insurers = @provider.insurers
+    @insurer = Insurer.new
   end
 
   def new
@@ -19,18 +21,6 @@ class ProvidersController < ApplicationController
     @provider.name = @info["name"]
     @provider.email = @info["email"]
     check_provider_auth(@provider)
-  end
-
-  def check_provider_auth(provider)
-    if provider.save
-      session[:auth].clear
-      session[:provider_id] = provider.id
-      flash[:notice] = "Signed in as #{provider.name}"
-      redirect_to provider
-    else
-      flash[:notice] = "Couldn't sign in"
-      redirect_to :back
-    end
   end
 
   def edit
@@ -48,6 +38,18 @@ class ProvidersController < ApplicationController
     else
       flash[:notice] = @provider.errors.full_messages.to_sentence
       render :edit
+    end
+  end
+
+  def check_provider_auth(provider)
+    if @provider.save
+      session[:auth].clear
+      session[:provider_id] = @provider.id
+      flash[:notice] = "Signed in as #{@provider.name}"
+      redirect_to @provider
+    else
+      flash[:notice] = "Couldn't sign in"
+      redirect_to :back
     end
   end
 
@@ -69,5 +71,9 @@ class ProvidersController < ApplicationController
       :bio,
       :profile_url
     )
+  end
+
+  def insurer_params
+    params.require(:insurer).permit(:company, :plan)
   end
 end

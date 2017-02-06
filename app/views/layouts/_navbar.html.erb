@@ -17,6 +17,11 @@
           <a href="<%= providers_path %>">Providers <span class="sr-only">(current)</span></a>
         </li>
         <li><a href="<%= appointments_path %>">Appointments</a></li>
+        <% if signed_in_user %>
+          <li><a href="<%= user_path(current_user) %>">My Profile</a></li>
+        <% elsif signed_in_provider %>
+          <li><a href="<%= provider_path(current_user) %>">My Profile</a></li>
+        <% end %>
         <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
