@@ -18,12 +18,13 @@ class App extends Component {
 
   render(){
     let search = <Search
-                  handleSearch = {this.handleSearch}
-                 />;
+      handleSearch = {this.handleSearch}
+     />;
 
     let providersContainer = <ProvidersContainer
-                              searchTerm = {this.state.searchTerm}
-                             />;
+      searchTerm = {this.state.searchTerm}
+     />;
+
     return(
       <div className="container-fluid">
         <div className="row">
