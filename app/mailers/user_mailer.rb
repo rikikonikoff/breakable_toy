@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
   def cancellation_email(appointment)
     @appointment = appointment
-    @user = @appointment.user
+    @user = User.find(@appointment.user_id)
     mail(to: @user.email, subject: 'Your Appointment Was Cancelled By The Provider')
   end
 end

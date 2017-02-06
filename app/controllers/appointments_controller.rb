@@ -91,7 +91,7 @@ class AppointmentsController < ApplicationController
     @provider = current_user
     if @appointment.destroy
       flash[:notice] = "Appointment Removed"
-      if @appointment.user
+      if @appointment.user_id
         UserMailer.cancellation_email(@appointment).deliver_now
       end
       redirect_to @provider
