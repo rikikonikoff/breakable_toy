@@ -1,7 +1,4 @@
 class InsuranceProvidersController < ApplicationController
-  def index
-  end
-
   def create
     InsuranceProvider.create(insurance_params)
   end

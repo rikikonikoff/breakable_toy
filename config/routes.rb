@@ -26,6 +26,6 @@ Rails.application.routes.draw do
   end
   resources :auth, only: [:show]
   resources :sessions, only: [:create, :destroy]
-  resources :insurers
-  resources :insurance_providers
+  resources :insurers, only: [:create]
+  resources :insurance_providers, only: [:create, :destroy]
 end
