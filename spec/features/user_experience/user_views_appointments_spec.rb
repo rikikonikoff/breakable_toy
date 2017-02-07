@@ -12,6 +12,7 @@ RSpec.feature "user views appointments" do
 
   scenario "user views all appointments" do
     sign_in_user(user.uid)
+    click_link "Appointments"
 
     expect(page).to have_content appointment.date.strftime("%a %B %d, %Y").to_s
     expect(page).to have_content appointment_2.date.strftime("%a %B %d, %Y").to_s
@@ -19,7 +20,6 @@ RSpec.feature "user views appointments" do
 
   xscenario "user views one provider's appointments", js: true do
     sign_in_user(user.uid)
-    click_link "Providers"
     find_content("#{provider.name}").trigger(click)
     click_link "See My Appointments"
 
@@ -30,6 +30,7 @@ RSpec.feature "user views appointments" do
   scenario "user views an individual appointment" do
     visit root_path
     sign_in_user(user.uid)
+    click_link "Appointments"
     @link = appointment.date.strftime("%a %B %d, %Y").to_s + " @ "
     @link += appointment.start_time.strftime("%I:%M%p").to_s
     click_link @link
@@ -39,6 +40,7 @@ RSpec.feature "user views appointments" do
 
   scenario "user views own booked appointments" do
     sign_in_user(user.uid)
+    click_link "Appointments"
     @link = appointment.date.strftime("%a %B %d, %Y").to_s + " @ "
     @link += appointment.start_time.strftime("%I:%M%p").to_s
     click_link @link

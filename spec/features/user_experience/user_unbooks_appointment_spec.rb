@@ -14,6 +14,7 @@ RSpec.feature "user unbooks an appointment" do
 
   scenario "user cancels a booking" do
     sign_in_user(user.uid)
+    click_link "Appointments"
     @link = appointment.date.strftime("%a %B %d, %Y").to_s + " @ "
     @link += appointment.start_time.strftime("%I:%M%p").to_s
     click_link @link
@@ -27,6 +28,7 @@ RSpec.feature "user unbooks an appointment" do
   scenario "user cannot cancel some other user's appointment" do
     user_2 = FactoryGirl.create(:user)
     sign_in_user(user_2.uid)
+    click_link "Appointments"
     @link = appointment.date.strftime("%a %B %d, %Y").to_s + " @ "
     @link += appointment.start_time.strftime("%I:%M%p").to_s
     click_link @link

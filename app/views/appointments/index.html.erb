@@ -15,8 +15,8 @@
           <% elsif current_user == a.provider %>
             <% if a.booked? %>
               (booked by
-              <%= link_to User.find(a.user_id).name,
-              user_path(User.find(a.user_id)) %>)
+              <%= link_to a.user.name,
+              user_path(a.user) %>)
             <% else %>
               (not yet booked)
             <% end %>
