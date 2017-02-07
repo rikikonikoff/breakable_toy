@@ -1,8 +1,15 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-12">
-      Edit Provider Info
-      <div><%= render "form", provider: @provider %></div>
+    <div class="center">
+      <div class="col-sm-12 provider-form">
+        <div class="card-block">
+          <br/>
+          <h3 class="card-title" style="text-align: center;">Edit Provider Info</h3>
+          <div style="text-align: left; padding: 15px;">
+            <%= render "form", provider: @provider %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

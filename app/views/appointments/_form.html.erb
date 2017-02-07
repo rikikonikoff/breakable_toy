@@ -1,19 +1,23 @@
-<ul style="list-style: none;" >
+<div style="text-align: center;" >
+  <br/>
   <%= form_for @appointment do |f| %>
-    <li class="date-select">
+    <p class="date-select">
       <%= f.label :date %>
-      <%= date_select :appointment, :date, start_year: Date.today.year, end_year: 3.years.from_now.year %>
-    </li>
-    <li class="start-time-select">
+      <%= date_select :appointment, :date,
+        start_year: Date.today.year,
+        end_year: 3.years.from_now.year %>
+    </p>
+    <p class="start-time-select">
       <%= f.label :start_time %>
       <%= time_select :appointment, :start_time, ampm: true, minute_step: 15 %>
-    </li>
-    <li class="end-time-select">
+    </p>
+    <p class="end-time-select">
       <%= f.label :end_time %>
       <%= time_select :appointment, :end_time, ampm: true, minute_step: 15  %>
-    </li>
-    <li>
+    </p>
+    <p>
       <%= f.submit "Add To My Appointments" %>
-    </li>
+    </p>
   <% end %>
-</ul>
+  <br/>
+</div>

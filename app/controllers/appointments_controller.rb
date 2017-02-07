@@ -13,6 +13,42 @@ class AppointmentsController < ApplicationController
   def show
     @appointment = Appointment.find(params[:id])
     @provider = @appointment.provider
+    @start = @appointment.start_time.strftime("%I:%M%p")
+    @end = @appointment.date.strftime("%a %B %d, %Y")
+    define_address
+    define_map_link
+    if @appointment.booked?
+      @booked = "yes"
+    else
+      @booked = "no"
+    end
+  end
+
+  def define_address
+    @address = ""
+    if @provider.work_address && @provider.city && @provider.state && @provider.zip
+      @address = "#{@provider.work_address} #{@provider.city}
+        #{@provider.state}, #{@provider.zip}"
+    elsif @provider.work_address && @provider.city && @provider.zip
+      @address = "#{@provider.work_address} #{@provider.city} #{@provider.zip}"
+    elsif @provider.work_address && @provider.zip
+      @address = "#{@provider.work_address} #{@provider.zip}"
+    elsif @provider.work_address
+      @address = @provider.work_address
+    end
+  end
+
+  def define_map_link
+    @map_link = ""
+    if @provider.work_address && @provider.city && @provider.state && @provider.zip
+      @map_link = "https://www.google.com/maps/place/#{@provider.work_address.tr(' ', '+')}+#{@provider.city}+#{@provider.state}+#{@provider.zip}"
+    elsif @provider.work_address && @provider.city && @provider.zip
+      @map_link = "https://www.google.com/maps/place/#{@provider.work_address.tr(' ', '+')}+#{@provider.city}+#{@provider.zip}"
+    elsif @provider.work_address && @provider.zip
+      @map_link = "https://www.google.com/maps/place/#{@provider.work_address.tr(' ', '+')}+#{@provider.zip}"
+    elsif @provider.work_address
+      @map_link = "https://www.google.com/maps/place/#{@provider.work_address.tr(' ', '+')}"
+    end
   end
 
   def new

@@ -1,38 +1,44 @@
-<%= form_for @provider do |f| %>
-  <p>
-    <%= f.label :name, "Your Full Name" %>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :work_address, "Work Address" %>
-    <%= f.text_field :work_address %>
-  </p>
-  <p>
-    <%= f.label :city %>
-    <%= f.text_field :city %>
-  </p>
-  <p>
-    <%= f.label :state %>
-    <%= f.select :state,
-      options_for_select(us_states),
-      default: @provider.state,
-      include_blank: true %>
-  </p>
-  <p>
-    <%= f.label :zip %>
-    <%= f.text_field :zip %>
-  </p>
-  <p>
-    <%= f.label :profile_url, "Add a link to your external profile" %>
-    <%= f.text_field :profile_url %>
-  </p>
-  <p>
-    <%= f.label :bio, "Tell us about yourself:" %>
-    <%= f.text_area :bio %>
-  </p>
-  <p><%= f.submit "Submit Changes" %></p>
-<% end %>
+<div>
+  <%= form_for @provider do |f| %>
+    <p>
+      <%= f.label :name, "Your Full Name", class: "col-sm-4" %>
+      <%= f.text_field :name, style: "width: 300px;" %>
+    </p>
+    <p>
+      <%= f.label :email, class: "col-sm-4" %>
+      <%= f.text_field :email, style: "width: 300px;" %>
+    </p>
+    <p>
+      <%= f.label :work_address, "Work Address", class: "col-sm-4" %>
+      <%= f.text_field :work_address, style: "width: 300px;" %>
+    </p>
+    <p>
+      <%= f.label :city, class: "col-sm-4" %>
+      <%= f.text_field :city, style: "width: 300px;" %>
+    </p>
+    <p>
+      <%= f.label :state, class: "col-sm-4" %>
+      <%= f.select :state,
+        options_for_select(us_states),
+        default: @provider.state,
+        include_blank: true,
+        style: "width: 300px;" %>
+    </p>
+    <p>
+      <%= f.label :zip, class: "col-sm-4" %>
+      <%= f.text_field :zip, style: "width: 300px;" %>
+    </p>
+    <p>
+      <%= f.label :profile_url,
+        "Add a link to your external profile",
+        class: "col-sm-4" %>
+      <%= f.text_field :profile_url, style: "width: 300px;" %>
+    </p>
+    <br/>
+    <p>
+      <%= f.label :bio, "Tell us about yourself:", class: "col-sm-4" %>
+      <%= f.text_area :bio, style: "width: 300px; height: 300px;" %>
+    </p>
+    <p style="text-align: center;"><%= f.submit "Submit Changes" %></p>
+  <% end %>
+</div>

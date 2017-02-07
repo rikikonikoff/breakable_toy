@@ -8,6 +8,8 @@ class ProvidersController < ApplicationController
     @appointments = @provider.appointments
     @insurers = @provider.insurers
     @insurer = Insurer.new
+    @address = "#{@provider.work_address} #{@provider.city}
+      #{@provider.state} #{@provider.zip}"
   end
 
   def new

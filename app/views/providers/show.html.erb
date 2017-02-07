@@ -9,17 +9,17 @@
   <div class="row">
     <div class="center">
       <div class="card-block">
-        <div class="appointments padded" style="text-align: center;">
-          <h3>Info</h3>
-          <p>
-            <%= @provider.work_address %>
-            <%= @provider.city %>
-            <%= @provider.state %>
-            <%= @provider.zip %>
-          </p>
-          <p><%= @provider.email %></p>
+        <div class="appointments padded">
+          <h3 style="text-align: center;">Info</h3>
+          <p style="text-align: center;"><%= @address %></p>
+          <p style="text-align: center;"><%= @provider.email %></p>
+          <p style="text-align: justify;"><%= @provider.bio %></p>
           <% if @provider.profile_url %>
-            <a href="<%= @provider.profile_url %>">My Profile</a>
+            <p style="text-align: center;">
+              <a href="<%= @provider.profile_url %>" class="in-block-link-2">
+              My Profile
+              </a>
+            </p>
           <% end %>
           <br/>
         </div>
@@ -33,33 +33,34 @@
       <div class="card-block">
         <div class="appointments padded">
           <h3 style="text-align: center;">My Appointments</h3>
-          <ul style="list-style: none;">
-            <% @appointments.each do |a| %>
-              <li>
-                <a href="<%= appointment_path(a) %>">
-                  <%= a.date.strftime("%a, %B %d %Y") %>:
-                  <%= a.start_time.strftime("%I:%M%p") %> -
-                  <%= a.end_time.strftime("%I:%M%p") %>
-                </a>
-                <% if signed_in_user %>
-                  (Appointment with
-                  <%= link_to a.provider.name, provider_path(a.provider) %> in
-                  <%= a.provider.city %>)
+          <% @appointments.each do |a| %>
+            <p style="text-align: center;">
+              <a href="<%= appointment_path(a) %>" class="in-block-link-2">
+                <%= a.date.strftime("%a, %B %d %Y") %>:
+                <%= a.start_time.strftime("%I:%M%p") %> -
+                <%= a.end_time.strftime("%I:%M%p") %>
+              </a>
+              <% if signed_in_user %>
+                (Appointment with
+                <%= link_to a.provider.name, provider_path(a.provider), class: "in-block-link-2" %> in <%= a.provider.city %>)
 
-                <% elsif current_user == a.provider %>
-                  <% if a.booked? %>
-                    (booked by
-                    <%= link_to a.user.name,
-                    user_path(a.user) %>)
-                  <% else %>
-                    (not yet booked)
-                  <% end %>
+              <% elsif current_user == a.provider %>
+                <% if a.booked? %>
+                  (booked by
+                  <%= link_to a.user.name,
+                  user_path(a.user), class: "in-block-link-2" %>)
+                <% else %>
+                  (not yet booked)
                 <% end %>
-              </li>
-            <% end %>
-          </ul>
+              <% end %>
+            </p>
+          <% end %>
+
           <% if current_user == @provider %>
-            <p><%= link_to "Add An Appointment", new_appointment_path %></p>
+            <p style="text-align: center;">
+              <%= link_to "Add An Appointment",
+                new_appointment_path, class: "in-block-link-2" %>
+            </p>
           <% end %>
           <br/>
         </div>
@@ -83,7 +84,8 @@
                       insurer: insurance,
                       provider: @provider
                     )),
-                    method: :delete %>
+                    method: :delete,
+                    class: "in-block-link-2" %>
                 <% end %>
               </li>
             <% end %>
@@ -110,7 +112,8 @@
     <div class="center">
       <div class="card-block">
         <div class="appointments padded" style="text-align: center;">
-          <%= link_to "Edit My Profile", edit_provider_path(@provider) %>
+          <%= link_to "Edit My Profile", edit_provider_path(@provider),
+            class: "in-block-link-2"%>
         </div>
       </div>
     </div>

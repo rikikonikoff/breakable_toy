@@ -1,32 +1,77 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-12">
-      <p>
-        Appointment with <%= @provider.name %> at <%= @appointment.start_time.strftime("%I:%M%p") %> on <%= @appointment.date.strftime("%a %B %d, %Y") %>
-      </p>
-      <p>
-        Address: <%= @provider.work_address %> <%= @provider.city %> <%= @provider.state %>, <%= @provider.zip %>
-      </p>
-      <p>Booked: <%= @appointment.booked? %></p>
-      <p>
-        <% if signed_in_user %>
-          <% if @appointment.booked? && @appointment.user_id == current_user.id %>
-            <%= button_to "Cancel Booking", unbook_appointment_path(@appointment), method: :patch %>
-          <% elsif !@appointment.booked? %>
-            <%= button_to "Book Appointment", book_appointment_path(@appointment), method: :patch %>
+    <div class="center">
+      <div class="col-sm-12">
+        <div class="card-block">
+          <h3 style="text-align: center;">
+            Appointment with <%= @provider.name %> <br/>
+            at <%= @start %> on <%= @end %>
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="center">
+      <div class="col-sm-12">
+        <div class="card-block">
+          <p class="col-sm-4">Address:</p>
+          <% if @address != "" %>
+            <strong><%= @address %></strong>
+            <a href="<%= @map_link %>" class="in-block-link">
+              View on Google Maps
+            </a>
+          <% else %>
+            N/A
           <% end %>
-          <br/>
-          <%= link_to "View My Booked Appointments", user_appointments_path(current_user) %>
-        <% end %>
-      </p>
-      <p>
-        <% if signed_in_provider && current_user == @provider %>
-          <p><%= link_to "Edit this Appointment", edit_appointment_path(@appointment) %></p>
-          <p>
-            <%= link_to "Remove this Appointment", appointment_path(@appointment), method: :delete %>
-          </p>
-        <% end %>
-      </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="center">
+      <div class="col-sm-12">
+        <div class="card-block">
+          <p style="text-align: center; padding: 5px;">Booked: <%= @booked %></p>
+          <% if signed_in_user %>
+            <% if @appointment.booked? && @appointment.user_id == current_user.id %>
+              <div style="text-align: center; padding: 15px;">
+                <%= button_to "Cancel Booking",
+                  unbook_appointment_path(@appointment), method: :patch %>
+              </div>
+            <% elsif !@appointment.booked? %>
+              <div style="text-align: center;">
+                <%= button_to "Book Appointment",
+                  book_appointment_path(@appointment), method: :patch %>
+              </div>
+            <% end %>
+            <br/>
+            <p style="text-align: center;">
+              <%= link_to "View My Booked Appointments",
+              user_appointments_path(current_user),
+              class: "in-block-link-2" %>
+            </p>
+          <% end %>
+        <p>
+          <% if signed_in_provider && current_user == @provider %>
+            <p class="col-sm-6">
+              <%= link_to "Edit this Appointment",
+                edit_appointment_path(@appointment),
+                class: "in-block-link",
+                style: "text-align: right;" %>
+            </p>
+            <p>
+              <%= link_to "Remove this Appointment",
+                appointment_path(@appointment),
+                method: :delete,
+                class: "in-block-link-2",
+                style: "padding-left: 15px;" %>
+            </p>
+          <% end %>
+        </p>
+      </div>
     </div>
   </div>
 </div>

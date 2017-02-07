@@ -17,7 +17,7 @@ RSpec.feature "user books an appointment" do
     click_button "Book Appointment"
 
     expect(page).to have_content "Appointment Booked!"
-    expect(page).to have_content "Booked: true"
+    expect(page).to have_content "Booked: yes"
     expect(page).to have_button "Cancel Booking"
   end
 
@@ -37,7 +37,7 @@ RSpec.feature "user books an appointment" do
     @link += appointment.start_time.strftime("%I:%M%p").to_s
     click_link @link
 
-    expect(page).to have_content "Booked: true"
+    expect(page).to have_content "Booked: yes"
     expect(page).to_not have_button "Book Appointment"
   end
 end
