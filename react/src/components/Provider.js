@@ -35,20 +35,20 @@ const Provider = props => {
   let showDetails;
   let appointmentsPath = `/providers/${props.id}`;
   if(props.selectedProviderId === props.id) {
-    showDetails = <div>
+    showDetails = <div className="padded">
       <p>{props.email}</p>
       {showAddress}
       <p>{props.bio}</p>
-      <h5><a href={appointmentsPath}>Go to My Page</a></h5>
+      <a href={appointmentsPath} id="provider-path-link">Go to My Page</a>
       <p> {showEditLink}</p>
       <br/>
     </div>;
   }
 
   return(
-    <div id="providerCard" className="card col-sm-4">
+    <div id="providerCard" className="card col-md-4">
       <div className="card-block">
-        <h3 className="card-title" onClick={handleClick}>{props.name}</h3>
+        <h2 className="card-title" onClick={handleClick}>{props.name}</h2>
         {showDetails}
       </div>
     </div>

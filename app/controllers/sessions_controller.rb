@@ -34,6 +34,6 @@ class SessionsController < ApplicationController
       @auth["uid"]
     ) || User.create_with_omniauth(@auth)
     session[:user_id] = user.id
-    redirect_to appointments_path
+    redirect_to providers_path
   end
 end

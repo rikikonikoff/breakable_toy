@@ -28,10 +28,10 @@ class App extends Component {
     return(
       <div className="container-fluid">
         <div className="row">
-          <h1 className="col-sm-4">Providers</h1>
+          <h1 className="col-md-4">Providers</h1>
         </div>
         <div className="row">
-          <div className="col-sm-4">{search}</div>
+          <div className="col-md-4">{search}</div>
         </div>
         <div>{providersContainer}</div>
       </div>
