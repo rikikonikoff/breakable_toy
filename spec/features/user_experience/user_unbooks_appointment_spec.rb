@@ -22,7 +22,7 @@ RSpec.feature "user unbooks an appointment" do
 
     expect(page).to have_content "Appointment Cancelled"
     expect(page).to have_button "Book Appointment"
-    expect(page).to have_content "Booked: false"
+    expect(page).to have_content "Booked: no"
   end
 
   scenario "user cannot cancel some other user's appointment" do
@@ -33,7 +33,7 @@ RSpec.feature "user unbooks an appointment" do
     @link += appointment.start_time.strftime("%I:%M%p").to_s
     click_link @link
 
-    expect(page).to have_content "Booked: true"
+    expect(page).to have_content "Booked: yes"
     expect(page).to_not have_button "Cancel Booking"
   end
 end

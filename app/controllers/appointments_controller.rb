@@ -15,15 +15,47 @@ class AppointmentsController < ApplicationController
     @provider = @appointment.provider
     @start = @appointment.start_time.strftime("%I:%M%p")
     @end = @appointment.date.strftime("%a %B %d, %Y")
-    @address = "#{@provider.work_address} #{@provider.city}
-      #{@provider.state}, #{@provider.zip}"
-    @map_link = "https://www.google.com/maps/place/
-      #{@provider.work_address.gsub(/ /, '+')}+#{@provider.city}+
-      #{@provider.state}+#{@provider.zip}"
+    define_address
+    define_map_link
     if @appointment.booked?
       @booked = "yes"
     else
       @booked = "no"
+    end
+  end
+
+  def define_address
+    if @provider.work_address && @provider.city && @provider.state && @provider.zip
+      @address = "#{@provider.work_address} #{@provider.city}
+        #{@provider.state}, #{@provider.zip}"
+    elsif @provider.work_address && @provider.city && @provider.zip
+      @address = "#{@provider.work_address} #{@provider.city} #{@provider.zip}"
+    elsif @provider.work_address && @provider.zip
+      @address = "#{@provider.work_address} #{@provider.zip}"
+    elsif @provider.work_address
+      @address = @provider.work_address
+    else
+      @address = ""
+    end
+  end
+
+  def define_map_link
+    if @provider.work_address && @provider.city && @provider.state && @provider.zip
+      @map_link = "https://www.google.com/maps/place/
+        #{@provider.work_address.gsub(/ /, '+')}+#{@provider.city}+
+        #{@provider.state}+#{@provider.zip}"
+    elsif @provider.work_address && @provider.city && @provider.zip
+      @map_link = "https://www.google.com/maps/place/
+        #{@provider.work_address.gsub(/ /, '+')}+#{@provider.city}+
+        #{@provider.zip}"
+    elsif @provider.work_address && @provider.zip
+      @map_link = "https://www.google.com/maps/place/
+        #{@provider.work_address.gsub(/ /, '+')}+#{@provider.zip}"
+    elsif @provider.work_address
+      @map_link = "https://www.google.com/maps/place/
+        #{@provider.work_address.gsub(/ /, '+')}"
+    else
+      @map_link = ""
     end
   end
 

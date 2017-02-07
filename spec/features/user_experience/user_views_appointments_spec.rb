@@ -35,7 +35,7 @@ RSpec.feature "user views appointments" do
     @link += appointment.start_time.strftime("%I:%M%p").to_s
     click_link @link
 
-    expect(page).to have_content "Booked: false"
+    expect(page).to have_content "Booked: no"
   end
 
   scenario "user views own booked appointments" do
