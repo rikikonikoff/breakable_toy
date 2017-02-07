@@ -1,41 +1,61 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-12">
-      <% if current_user == @user || current_user.users.include?(@user) %>
-        <h1><%= @user.name %></h1>
+<% if current_user == @user || current_user.users.include?(@user) %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 style="text-align: center;"><%= @user.name %></h1>
         <br/>
+      </div>
+    </div>
 
-        <h3>
-          Address:
-          <%= @user.address %>
-          <%= @user.city %>
-          <%= @user.state %>
-          <%= @user.zip %>
-        </h3>
-        <br/>
-
-        <div>
-          <h3>My Appointments</h3>
-          <ul style="list-style: none;">
-            <% @appointments.each do |appointment| %>
-              <li>
-                <a href="<%= appointment_path(appointment) %>">
-                  Appointment with <%= appointment.provider.name %> on
-                  <%= appointment.date.strftime("%a, %B %d %Y") %>:
-                  <%= appointment.start_time.strftime("%I:%M%p") %> -
-                  <%= appointment.end_time.strftime("%I:%M%p") %>
-                </a>
-              </li>
-            <% end %>
-          </ul>
+    <div class="row">
+      <div class="center">
+        <div class="card-block">
+          <div class="appointments padded">
+            <h3 style="text-align: center;">Info</h3>
+            <p style="text-align: center;">
+              <%= @user.address %>
+              <%= @user.city %>
+              <%= @user.state %>
+              <%= @user.zip %>
+            </p>
+            <p style="text-align: center;"><%= @user.email %></p>
+            <br/>
+          </div>
         </div>
-        <br/>
+      </div>
+    </div>
+    <br/>
 
-        <div>
-          <h3>My Insurance</h3>
-          <ul style="list-style: none;">
-            <% @insurers.each do |insurance| %>
-              <li>
+    <div class="row">
+      <div class="center">
+        <div class="card-block">
+          <div class="appointments padded">
+            <h3 style="text-align: center;">My Appointments</h3>
+            <% @appointments.each do |a| %>
+              <p style="text-align: center;">
+                <a href="<%= appointment_path(a) %>" class="in-block-link-2">
+                  Appointment with <%= a.provider.name %>
+                  on <%= a.date.strftime("%a, %B %d %Y") %>:
+                  <%= a.start_time.strftime("%I:%M%p") %> -
+                  <%= a.end_time.strftime("%I:%M%p") %>
+                </a>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+
+
+    <div class="row">
+      <div class="center">
+        <div class="card-block">
+          <div class="appointments padded">
+            <h3 style="text-align: center;">My Insurance</h3>
+            <ul style="list-style: none;">
+              <% @insurers.each do |insurance| %>
+                <li>
                   <%= insurance.company %> <%= insurance.plan %>
                   <% if current_user == @user %>
                     <%= link_to "(Remove)",
@@ -43,20 +63,41 @@
                         insurer: insurance,
                         user: @user
                       )),
-                      method: :delete %>
+                      method: :delete,
+                      class: "in-block-link-2" %>
                   <% end %>
-              </li>
-            <% end %>
-          </ul>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
-        <br/>
-
-      <div>
-        <%= link_to "Edit My Profile", edit_user_path(@user) %>
-        <p>Add your Insurance Provider:</p>
-        <%= render "insurers/form", insurer: @insurer %>
       </div>
-      <% end %>
     </div>
-  </div>
-</div>
+    <br/>
+
+    <% if current_user == @user %>
+      <div class="row">
+        <div class="center">
+          <div class="card-block">
+            <div class="appointments padded" style="text-align: center;">
+                <p>Add your Insurance Provider:</p>
+                <%= render "insurers/form", insurer: @insurer %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="center">
+          <div class="card-block">
+            <div class="appointments padded" style="text-align: center;">
+              <%= link_to "Edit My Profile", edit_user_path(@user),
+                class: "in-block-link-2"%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+  <% end %>
+<% end %>

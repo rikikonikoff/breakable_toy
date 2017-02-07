@@ -1,30 +1,31 @@
 <%= form_for @user do |f| %>
   <p>
-    <%= f.label :name, "Your Full Name" %>
-    <%= f.text_field :name %>
+    <%= f.label :name, "Your Full Name", class: "col-sm-4" %>
+    <%= f.text_field :name, style: "width: 300px;" %>
   </p>
   <p>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
+    <%= f.label :email, class: "col-sm-4" %>
+    <%= f.text_field :email, style: "width: 300px;" %>
   </p>
   <p>
-    <%= f.label :address %>
-    <%= f.text_field :address %>
+    <%= f.label :address, class: "col-sm-4" %>
+    <%= f.text_field :address, style: "width: 300px;" %>
   </p>
   <p>
-    <%= f.label :city %>
-    <%= f.text_field :city %>
+    <%= f.label :city, class: "col-sm-4" %>
+    <%= f.text_field :city, style: "width: 300px;" %>
   </p>
   <p>
-    <%= f.label :state %>
+    <%= f.label :state, class: "col-sm-4" %>
     <%= f.select :state,
       options_for_select(us_states),
       default: @user.state,
-      include_blank: true %>
+      include_blank: true,
+      style: "width: 300px;" %>
   </p>
   <p>
-    <%= f.label :zip %>
-    <%= f.text_field :zip %>
+    <%= f.label :zip, class: "col-sm-4" %>
+    <%= f.text_field :zip, style: "width: 300px;" %>
   </p>
-  <p><%= f.submit "Submit Changes" %></p>
+  <p style="text-align: center;"><%= f.submit "Submit Changes" %></p>
 <% end %>

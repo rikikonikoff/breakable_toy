@@ -1,8 +1,15 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-12">
-      <h3>Edit My Profile</h3>
-      <%= render "form", user: @user %>
+    <div class="center">
+      <div class="col-sm-12 provider-form">
+        <div class="card-block">
+          <br/>
+          <h3 class="card-title" style="text-align: center;">Edit My Profile</h3>
+          <div style="text-align: left; padding: 15px;">
+            <%= render "form", user: @user %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

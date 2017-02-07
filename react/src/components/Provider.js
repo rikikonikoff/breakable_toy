@@ -39,7 +39,9 @@ const Provider = props => {
       <p>{props.email}</p>
       {showAddress}
       <p>{props.bio}</p>
-      <a href={appointmentsPath} id="provider-path-link">Go to My Page</a>
+      <a href={appointmentsPath} id="provider-path-link" className="in-block-link-2">
+        Go to My Page
+      </a>
       <p> {showEditLink}</p>
       <br/>
     </div>;

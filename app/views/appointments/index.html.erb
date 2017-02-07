@@ -11,17 +11,17 @@
       <% @appointments.each do |a| %>
         <div class="card-block">
           <div class="appointments padded">
-            <%= link_to "#{a.date.strftime("%a %B %d, %Y")} @ #{a.start_time.strftime("%I:%M%p")}", appointment_path(a) %>
+            <%= link_to "#{a.date.strftime("%a %B %d, %Y")} @ #{a.start_time.strftime("%I:%M%p")}", appointment_path(a), class: "in-block-link-2" %>
             <% if signed_in_user %>
               (Appointment with
-              <%= link_to a.provider.name, provider_path(a.provider) %> in
+              <%= link_to a.provider.name, provider_path(a.provider), class: "in-block-link-2" %> in
               <%= a.provider.city %>)
 
             <% elsif current_user == a.provider %>
               <% if a.booked? %>
                 (booked by
                 <%= link_to a.user.name,
-                user_path(a.user) %>)
+                user_path(a.user), class: "in-block-link-2" %>)
               <% else %>
                 (not yet booked)
               <% end %>
@@ -39,7 +39,7 @@
         <div class="col" style="text-align: center;">
           <div class="card-block">
             <div class="appointments padded">
-              <%= link_to "Add an Appointment", new_appointment_path %>
+              <%= link_to "Add an Appointment", new_appointment_path, class: "in-block-link-2" %>
           </div>
         </div>
       </div>

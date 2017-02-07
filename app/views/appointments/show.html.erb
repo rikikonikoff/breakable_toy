@@ -17,10 +17,14 @@
       <div class="col-sm-12">
         <div class="card-block">
           <p class="col-sm-4">Address:</p>
-          <strong><%= @address %></strong>
-          <a href="<%= @map_link %>" class="in-block-link">
-            View on Google Maps
-          </a>
+          <% if @address != "" %>
+            <strong><%= @address %></strong>
+            <a href="<%= @map_link %>" class="in-block-link">
+              View on Google Maps
+            </a>
+          <% else %>
+            N/A
+          <% end %>
         </div>
       </div>
     </div>
@@ -30,24 +34,26 @@
     <div class="center">
       <div class="col-sm-12">
         <div class="card-block">
-          <p style="text-align: center;">Booked: <%= @booked %></p>
-        <p>
+          <p style="text-align: center; padding: 5px;">Booked: <%= @booked %></p>
           <% if signed_in_user %>
             <% if @appointment.booked? && @appointment.user_id == current_user.id %>
-              <%= button_to "Cancel Booking",
-                unbook_appointment_path(@appointment),
-                method: :patch,
-                style: "text-align: center;" %>
+              <div style="text-align: center; padding: 15px;">
+                <%= button_to "Cancel Booking",
+                  unbook_appointment_path(@appointment), method: :patch %>
+              </div>
             <% elsif !@appointment.booked? %>
-              <%= button_to "Book Appointment",
-                book_appointment_path(@appointment),
-                method: :patch,
-                style: "text-align: center;" %>
+              <div style="text-align: center;">
+                <%= button_to "Book Appointment",
+                  book_appointment_path(@appointment), method: :patch %>
+              </div>
             <% end %>
             <br/>
-            <%= link_to "View My Booked Appointments", user_appointments_path(current_user) %>
+            <p style="text-align: center;">
+              <%= link_to "View My Booked Appointments",
+              user_appointments_path(current_user),
+              class: "in-block-link-2" %>
+            </p>
           <% end %>
-        </p>
         <p>
           <% if signed_in_provider && current_user == @provider %>
             <p class="col-sm-6">
