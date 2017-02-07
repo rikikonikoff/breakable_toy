@@ -1,5 +1,5 @@
 class ProviderMailer < ApplicationMailer
-  default from: 'accesspointmentalhealth@example.com'
+  default from: 'accesspointmentalhealth@gmail.com'
 
   def booking_email(appointment)
     @appointment = appointment

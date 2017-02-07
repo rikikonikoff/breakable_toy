@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'accesspointmentalhealth@example.com'
+  default from: 'accesspointmentalhealth@gmail.com'
 
   def cancellation_email(appointment)
     @appointment = appointment
