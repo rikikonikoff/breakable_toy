@@ -1,64 +1,120 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-12">
-      <h1><%= @provider.name %></h1>
+      <h1 style="text-align: center;"><%= @provider.name %></h1>
       <br/>
+    </div>
+  </div>
 
-      <h3>
-        Work Address:
-        <%= @provider.work_address %>
-        <%= @provider.city %>
-        <%= @provider.state %>
-        <%= @provider.zip %>
-      </h3>
-      <br/>
-
-      <div>
-        <h3>My Appointments</h3>
-        <ul style="list-style: none;">
-          <% @appointments.each do |appointment| %>
-            <li>
-              <a href="<%= appointment_path(appointment) %>">
-                <%= appointment.date.strftime("%a, %B %d %Y") %>:
-                <%= appointment.start_time.strftime("%I:%M%p") %> -
-                <%= appointment.end_time.strftime("%I:%M%p") %>
-              </a>
-            </li>
+  <div class="row">
+    <div class="center">
+      <div class="card-block">
+        <div class="appointments padded" style="text-align: center;">
+          <h3>Info</h3>
+          <p>
+            <%= @provider.work_address %>
+            <%= @provider.city %>
+            <%= @provider.state %>
+            <%= @provider.zip %>
+          </p>
+          <p><%= @provider.email %></p>
+          <% if @provider.profile_url %>
+            <a href="<%= @provider.profile_url %>">My Profile</a>
           <% end %>
-        </ul>
-        <% if current_user == @provider %>
-          <p><%= link_to "Add An Appointment", new_appointment_path %></p>
-        <% end %>
-        <br/>
-      </div>
-
-      <div>
-        <h3>Insurances I Accept</h3>
-        <ul style="list-style: none;">
-          <% @insurers.each do |insurance| %>
-            <li>
-              <%= insurance.company %> <%= insurance.plan %>
-              <% if current_user == @provider %>
-                <%= link_to "(Remove)",
-                  insurance_provider_path(InsuranceProvider.find_by(
-                    insurer: insurance,
-                    provider: @provider
-                  )),
-                  method: :delete %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-      <br/>
-
-      <div>
-        <% if current_user == @provider %>
-          <%= link_to "Edit My Profile", edit_provider_path(@provider) %>
-          <p>Add an Insurance Provider that you accept:</p>
-          <%= render "insurers/form", insurer: @insurer %>
-        <% end %>
+          <br/>
+        </div>
       </div>
     </div>
   </div>
+  <br/>
+
+  <div class="row">
+    <div class="center">
+      <div class="card-block">
+        <div class="appointments padded">
+          <h3 style="text-align: center;">My Appointments</h3>
+          <ul style="list-style: none;">
+            <% @appointments.each do |a| %>
+              <li>
+                <a href="<%= appointment_path(a) %>">
+                  <%= a.date.strftime("%a, %B %d %Y") %>:
+                  <%= a.start_time.strftime("%I:%M%p") %> -
+                  <%= a.end_time.strftime("%I:%M%p") %>
+                </a>
+                <% if signed_in_user %>
+                  (Appointment with
+                  <%= link_to a.provider.name, provider_path(a.provider) %> in
+                  <%= a.provider.city %>)
+
+                <% elsif current_user == a.provider %>
+                  <% if a.booked? %>
+                    (booked by
+                    <%= link_to a.user.name,
+                    user_path(a.user) %>)
+                  <% else %>
+                    (not yet booked)
+                  <% end %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+          <% if current_user == @provider %>
+            <p><%= link_to "Add An Appointment", new_appointment_path %></p>
+          <% end %>
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+
+  <div class="row">
+    <div class="center">
+      <div class="card-block">
+        <div class="appointments padded">
+          <h3 style="text-align: center;">Insurances I Accept</h3>
+          <ul style="list-style: none;">
+            <% @insurers.each do |insurance| %>
+              <li>
+                <%= insurance.company %> <%= insurance.plan %>
+                <% if current_user == @provider %>
+                  <%= link_to "(Remove)",
+                    insurance_provider_path(InsuranceProvider.find_by(
+                      insurer: insurance,
+                      provider: @provider
+                    )),
+                    method: :delete %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+
+  <% if current_user == @provider %>
+  <div class="row">
+    <div class="center">
+      <div class="card-block">
+        <div class="appointments padded" style="text-align: center;">
+            <p>Add an Insurance Provider:</p>
+            <%= render "insurers/form", insurer: @insurer %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="center">
+      <div class="card-block">
+        <div class="appointments padded" style="text-align: center;">
+          <%= link_to "Edit My Profile", edit_provider_path(@provider) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <% end %>
 </div>

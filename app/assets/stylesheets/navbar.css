@@ -16,6 +16,11 @@ a:hover {
   font-size: 18px;
 }
 
+.appointments.padded {
+  padding: 5px;
+  font-size: 15px;
+}
+
 #hometitle {
   text-align: center;
 }
@@ -39,4 +44,9 @@ a:hover {
   font-weight: bold;
   font-size: 25px;
   color: #216869;
+}
+
+.center {
+    margin: 0 auto;
+    width: 80%;
 }
