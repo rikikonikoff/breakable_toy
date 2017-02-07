@@ -33,16 +33,16 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="center">
-      <div class="col" style="text-align: center;">
-        <div class="card-block">
-          <div class="appointments padded">
-            <% if signed_in_provider %>
+  <% if signed_in_provider %>
+    <div class="row">
+      <div class="center">
+        <div class="col" style="text-align: center;">
+          <div class="card-block">
+            <div class="appointments padded">
               <%= link_to "Add an Appointment", new_appointment_path %>
-            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>

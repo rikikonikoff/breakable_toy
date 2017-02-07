@@ -13,6 +13,18 @@ class AppointmentsController < ApplicationController
   def show
     @appointment = Appointment.find(params[:id])
     @provider = @appointment.provider
+    @start = @appointment.start_time.strftime("%I:%M%p")
+    @end = @appointment.date.strftime("%a %B %d, %Y")
+    @address = "#{@provider.work_address} #{@provider.city}
+      #{@provider.state}, #{@provider.zip}"
+    @map_link = "https://www.google.com/maps/place/
+      #{@provider.work_address.gsub(/ /, '+')}+#{@provider.city}+
+      #{@provider.state}+#{@provider.zip}"
+    if @appointment.booked?
+      @booked = "yes"
+    else
+      @booked = "no"
+    end
   end
 
   def new

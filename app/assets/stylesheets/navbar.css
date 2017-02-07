@@ -11,6 +11,19 @@ a:hover {
   color: #97C9B9;
 }
 
+a.in-block-link {
+  float: right;
+  padding-right: 15px;
+}
+
+a.in-block-link:hover {
+  color: #BCE2CB;
+}
+
+a.in-block-link-2:hover {
+  color: #BCE2CB;
+}
+
 .padded {
   padding: 5px;
   font-size: 18px;
@@ -48,5 +61,10 @@ a:hover {
 
 .center {
     margin: 0 auto;
-    width: 80%;
+    width: 60%;
+}
+
+.appointment-form {
+  margin: 0 auto;
+  width: 60%;
 }
