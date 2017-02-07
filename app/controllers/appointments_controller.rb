@@ -25,6 +25,7 @@ class AppointmentsController < ApplicationController
   end
 
   def define_address
+    @address = ""
     if @provider.work_address && @provider.city && @provider.state && @provider.zip
       @address = "#{@provider.work_address} #{@provider.city}
         #{@provider.state}, #{@provider.zip}"
@@ -34,28 +35,19 @@ class AppointmentsController < ApplicationController
       @address = "#{@provider.work_address} #{@provider.zip}"
     elsif @provider.work_address
       @address = @provider.work_address
-    else
-      @address = ""
     end
   end
 
   def define_map_link
+    @map_link = ""
     if @provider.work_address && @provider.city && @provider.state && @provider.zip
-      @map_link = "https://www.google.com/maps/place/
-        #{@provider.work_address.gsub(/ /, '+')}+#{@provider.city}+
-        #{@provider.state}+#{@provider.zip}"
+      @map_link = "https://www.google.com/maps/place/#{@provider.work_address.tr(' ', '+')}+#{@provider.city}+#{@provider.state}+#{@provider.zip}"
     elsif @provider.work_address && @provider.city && @provider.zip
-      @map_link = "https://www.google.com/maps/place/
-        #{@provider.work_address.gsub(/ /, '+')}+#{@provider.city}+
-        #{@provider.zip}"
+      @map_link = "https://www.google.com/maps/place/#{@provider.work_address.tr(' ', '+')}+#{@provider.city}+#{@provider.zip}"
     elsif @provider.work_address && @provider.zip
-      @map_link = "https://www.google.com/maps/place/
-        #{@provider.work_address.gsub(/ /, '+')}+#{@provider.zip}"
+      @map_link = "https://www.google.com/maps/place/#{@provider.work_address.tr(' ', '+')}+#{@provider.zip}"
     elsif @provider.work_address
-      @map_link = "https://www.google.com/maps/place/
-        #{@provider.work_address.gsub(/ /, '+')}"
-    else
-      @map_link = ""
+      @map_link = "https://www.google.com/maps/place/#{@provider.work_address.tr(' ', '+')}"
     end
   end
 
