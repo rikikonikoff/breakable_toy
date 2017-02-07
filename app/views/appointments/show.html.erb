@@ -1,26 +1,32 @@
-<div>
-  <p>
-    Appointment with <%= @provider.name %> at <%= @appointment.start_time.strftime("%I:%M%p") %> on <%= @appointment.date.strftime("%a %B %d, %Y") %>
-  </p>
-  <p>
-    Address: <%= @provider.work_address %> <%= @provider.city %> <%= @provider.state %>, <%= @provider.zip %>
-  </p>
-  <p>Booked: <%= @appointment.booked? %></p>
-  <p>
-    <% if signed_in_user %>
-      <% if @appointment.booked? && @appointment.user_id == current_user.id %>
-        <%= button_to "Cancel Booking", unbook_appointment_path(@appointment), method: :patch %>
-      <% elsif !@appointment.booked? %>
-        <%= button_to "Book Appointment", book_appointment_path(@appointment), method: :patch %>
-      <% end %>
-      <br/>
-      <%= link_to "View My Booked Appointments", user_appointments_path(current_user) %>
-    <% end %>
-  </p>
-  <p>
-    <% if signed_in_provider && current_user == @provider %>
-      <%= link_to "Edit this Appointment", edit_appointment_path(@appointment) %>
-      <%= link_to "Remove this Appointment", appointment_path(@appointment), method: :delete %>
-    <% end %>
-  </p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <p>
+        Appointment with <%= @provider.name %> at <%= @appointment.start_time.strftime("%I:%M%p") %> on <%= @appointment.date.strftime("%a %B %d, %Y") %>
+      </p>
+      <p>
+        Address: <%= @provider.work_address %> <%= @provider.city %> <%= @provider.state %>, <%= @provider.zip %>
+      </p>
+      <p>Booked: <%= @appointment.booked? %></p>
+      <p>
+        <% if signed_in_user %>
+          <% if @appointment.booked? && @appointment.user_id == current_user.id %>
+            <%= button_to "Cancel Booking", unbook_appointment_path(@appointment), method: :patch %>
+          <% elsif !@appointment.booked? %>
+            <%= button_to "Book Appointment", book_appointment_path(@appointment), method: :patch %>
+          <% end %>
+          <br/>
+          <%= link_to "View My Booked Appointments", user_appointments_path(current_user) %>
+        <% end %>
+      </p>
+      <p>
+        <% if signed_in_provider && current_user == @provider %>
+          <p><%= link_to "Edit this Appointment", edit_appointment_path(@appointment) %></p>
+          <p>
+            <%= link_to "Remove this Appointment", appointment_path(@appointment), method: :delete %>
+          </p>
+        <% end %>
+      </p>
+    </div>
+  </div>
 </div>

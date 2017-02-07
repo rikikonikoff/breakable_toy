@@ -1,13 +1,17 @@
-<h1>Appointments</h1>
-
-<ul style="list-style: none;">
-  <% @appointments.each do |a| %>
-    <li>
-      <%= link_to "#{a.date.strftime("%a %B %d, %Y")} @ #{a.start_time.strftime("%I:%M%p")}", appointment_path(a) %>
-    </li>
-  <% end %>
-</ul>
-
-<% if signed_in_provider %>
-  <%= link_to "Add an Appointment", new_appointment_path %>
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Appointments</h1>
+      <br/>
+      <% @appointments.each do |a| %>
+        <p>
+          <%= link_to "#{a.date.strftime("%a %B %d, %Y")} @ #{a.start_time.strftime("%I:%M%p")}", appointment_path(a) %>
+        </p>
+      <% end %>
+      <br/>
+      <% if signed_in_provider %>
+        <p><%= link_to "Add an Appointment", new_appointment_path %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
