@@ -16,12 +16,11 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     server: 'smtp.sendgrid.net',
     port: '587',
-    user_name: ENV['SENDGRID_USERNAME_2'],
-    password: ENV['SENDGRID_API_KEY_2'],
+    user_name: ENV['SENDGRID_USERNAME'],
+    password: ENV['SENDGRID_PASSWORD'],
     domain: 'accesspoint.herokuapp.com',
     authentication: :plain
   }
-  config.action_mailer.set_default_url_options[:host]
 
   config.i18n.fallbacks = true
 
