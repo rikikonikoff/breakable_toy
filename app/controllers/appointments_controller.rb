@@ -19,7 +19,7 @@ class AppointmentsController < ApplicationController
     if signed_in_provider
       @appointment = Appointment.new
     else
-      flash[:notice] = "Sorry, you can't create new appointments"
+      flash[:notice] = "Sorry, only providers can create new appointments"
       redirect_to appointments_path
     end
   end

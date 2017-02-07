@@ -3,12 +3,28 @@
     <div class="col-sm-12">
       <h1>Appointments</h1>
       <br/>
+
       <% @appointments.each do |a| %>
         <p>
           <%= link_to "#{a.date.strftime("%a %B %d, %Y")} @ #{a.start_time.strftime("%I:%M%p")}", appointment_path(a) %>
+          <% if signed_in_user %>
+            (Appointment with
+            <%= link_to a.provider.name, provider_path(a.provider) %> in
+            <%= a.provider.city %>)
+
+          <% elsif current_user == a.provider %>
+            <% if a.booked? %>
+              (booked by
+              <%= link_to User.find(a.user_id).name,
+              user_path(User.find(a.user_id)) %>)
+            <% else %>
+              (not yet booked)
+            <% end %>
+          <% end %>
         </p>
       <% end %>
       <br/>
+
       <% if signed_in_provider %>
         <p><%= link_to "Add an Appointment", new_appointment_path %></p>
       <% end %>
