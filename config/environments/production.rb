@@ -21,6 +21,7 @@ Rails.application.configure do
     domain: 'accesspoint.herokuapp.com',
     authentication: :plain
   }
+  config.action_mailer.set_default_url_options[:host]
 
   config.i18n.fallbacks = true
 
@@ -34,7 +35,6 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   config.active_record.time_zone_aware_types = [:datetime, :time]
 end
