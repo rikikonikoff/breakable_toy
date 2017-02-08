@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206154347) do
+ActiveRecord::Schema.define(version: 20170208162035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,10 +49,11 @@ ActiveRecord::Schema.define(version: 20170206154347) do
     t.string "state"
     t.string "zip"
     t.text   "bio"
-    t.string "profile_url"
+    t.string "profile"
     t.string "provider",     default: "google_oauth2"
     t.string "uid"
     t.string "email",                                  null: false
+    t.string "avatar"
   end
 
   create_table "users", force: :cascade do |t|
@@ -65,4 +66,5 @@ ActiveRecord::Schema.define(version: 20170206154347) do
     t.string "uid"
     t.string "email"
   end
+
 end

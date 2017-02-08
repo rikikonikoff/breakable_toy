@@ -11,17 +11,21 @@
       <div class="card-block">
         <div class="appointments padded">
           <h3 style="text-align: center;">Info</h3>
-          <p style="text-align: center;"><%= @address %></p>
-          <p style="text-align: center;"><%= @provider.email %></p>
-          <p style="text-align: justify;"><%= @provider.bio %></p>
-          <% if @provider.profile_url %>
-            <p style="text-align: center;">
-              <a href="<%= @provider.profile_url %>" class="in-block-link-2">
-              My Profile
-              </a>
-            </p>
-          <% end %>
-          <br/>
+          <div class="row" style="padding: 15px;">
+            <img src="<%= @provider.avatar %>" class="col-xs-3">
+            <div class="col-xs-9">
+              <p><%= @address %></p>
+              <p><%= @provider.email %></p>
+              <p style="text-align: justify;"><%= @provider.bio %></p>
+              <% if @provider.profile %>
+                <p>
+                  <a href="<%= @provider.profile %>" class="in-block-link-2">
+                  My Profile
+                  </a>
+                </p>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     </div>

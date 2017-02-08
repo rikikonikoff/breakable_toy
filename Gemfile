@@ -1,26 +1,27 @@
 source 'https://rubygems.org/'
 ruby '2.3.1'
 
+gem 'active_model_serializers'
+gem 'bootstrap'
+gem 'carrierwave'
+gem 'gmail'
+gem 'jquery-rails'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.0'
-gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
-gem 'gmail'
-gem 'uglifier', '>= 1.3.0'
-gem 'active_model_serializers'
-gem 'omniauth'
-gem 'bootstrap'
-gem 'omniauth-google-oauth2'
 gem 'sendgrid'
-gem 'validates_email_format_of'
 gem 'sprockets-rails'
+gem 'uglifier', '>= 1.3.0'
+gem 'validates_email_format_of'
 
 group :test do
   gem 'coveralls', require: false
   gem "codeclimate-test-reporter", "~> 1.0.0"
-  gem "simplecov"
   gem 'database_cleaner'
+  gem "simplecov"
 end
 
 group :development do
@@ -34,10 +35,10 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
   gem 'launchy', require: false
+  gem 'poltergeist'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5'
   gem 'shoulda'
-  gem 'poltergeist'
   gem 'valid_attribute'
 end
 

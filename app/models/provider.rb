@@ -1,7 +1,8 @@
 class Provider < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
+
   has_many :appointments
   has_many :users, through: :appointments
-
   has_many :insurance_providers
   has_many :insurers, through: :insurance_providers
 
@@ -16,6 +17,7 @@ class Provider < ApplicationRecord
       record.uid = auth.uid
       record.name = auth.info.name
       record.email = auth.info.email
+      record.avatar = auth.info.image
     end
   end
 end
