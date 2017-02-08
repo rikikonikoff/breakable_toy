@@ -18,14 +18,15 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :home, only: [:show]
-  resources :appointments
-  resources :providers
-  resources :users do
-    resources :appointments, only: [:index]
-  end
   resources :auth, only: [:show]
   resources :sessions, only: [:create, :destroy]
+  resources :home, only: [:show]
+  resources :resources, only: [:index]
+  resources :appointments
+  resources :providers
+  resources :users, except: [:index] do
+    resources :appointments, only: [:index]
+  end
   resources :insurers, only: [:create]
   resources :insurance_providers, only: [:create, :destroy]
 end
