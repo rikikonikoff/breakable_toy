@@ -19,9 +19,10 @@ Rails.application.routes.draw do
   end
 
   resources :home, only: [:show]
+  resources :resources, only: [:index]
   resources :appointments
   resources :providers
-  resources :users do
+  resources :users , except: [:index] do
     resources :appointments, only: [:index]
   end
   resources :auth, only: [:show]

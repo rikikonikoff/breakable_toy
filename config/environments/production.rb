@@ -22,7 +22,9 @@ Rails.application.configure do
     domain: 'accesspoint.herokuapp.com',
     authentication: :plain
   }
-  config.action_mailer.default_url_options = { host: 'accesspoint.herokuapp.com' }
+  config.action_mailer.default_url_options = {
+    host: 'accesspoint.herokuapp.com'
+  }
 
   config.i18n.fallbacks = true
 

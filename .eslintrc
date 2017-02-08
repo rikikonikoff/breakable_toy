@@ -214,3 +214,7 @@ rules:
   prefer-spread: 0
   prefer-template: 0
   require-yield: 0
+
+globals:
+  require: true
+  import: true

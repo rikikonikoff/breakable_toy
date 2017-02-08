@@ -7,11 +7,10 @@ class InsuranceProvidersController < ApplicationController
     @insurance_provider = InsuranceProvider.find(params[:id])
     if @insurance_provider.destroy
       flash[:notice] = "Insurance Removed"
-      redirect_back(fallback_location: root_path)
     else
       flash[:notice] = "There was an error removing your insurance"
-      redirect_back(fallback_location: root_path)
     end
+    redirect_back(fallback_location: root_path)
   end
 
   private
