@@ -2,12 +2,13 @@ class ProviderSerializer < ActiveModel::Serializer
   attributes :id,
     :name,
     :bio,
-    :profile_url,
+    :profile,
     :email,
     :work_address,
     :city,
     :state,
-    :zip
+    :zip,
+    :avatar
 
   has_many :appointments
   has_many :users, through: :appointments

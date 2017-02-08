@@ -29,15 +29,19 @@
       <%= f.text_field :zip, style: "width: 300px;" %>
     </p>
     <p>
-      <%= f.label :profile_url,
+      <%= f.label :profile,
         "Add a link to your external profile",
         class: "col-sm-4" %>
-      <%= f.text_field :profile_url, style: "width: 300px;" %>
+      <%= f.text_field :profile, style: "width: 300px;" %>
     </p>
     <br/>
     <p>
       <%= f.label :bio, "Tell us about yourself:", class: "col-sm-4" %>
       <%= f.text_area :bio, style: "width: 300px; height: 300px;" %>
+    </p>
+    <p>
+      <%= f.label :avatar, "Change your profile picture:", class: "col-sm-4" %>
+      <%= f.file_field :avatar, style: "width: 300px;" %>
     </p>
     <p style="text-align: center;"><%= f.submit "Submit Changes" %></p>
   <% end %>

@@ -15,6 +15,7 @@ gem 'omniauth-google-oauth2'
 gem 'sendgrid'
 gem 'validates_email_format_of'
 gem 'sprockets-rails'
+gem 'carrierwave'
 
 group :test do
   gem 'coveralls', require: false

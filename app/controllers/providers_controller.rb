@@ -1,4 +1,6 @@
 class ProvidersController < ApplicationController
+    after_action :set_avatar!, only: [:create]
+
   def index
     @providers = Provider.all
   end
@@ -22,6 +24,7 @@ class ProvidersController < ApplicationController
     @provider = Provider.new(oauth_uid: session[:auth]["uid"])
     @provider.name = @info["name"]
     @provider.email = @info["email"]
+    @provider.avatar = @info["image"]
     check_provider_auth(@provider)
   end
 
@@ -71,7 +74,8 @@ class ProvidersController < ApplicationController
       :state,
       :zip,
       :bio,
-      :profile_url
+      :profile,
+      :avatar
     )
   end
 
