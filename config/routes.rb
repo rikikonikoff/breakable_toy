@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :auth, only: [:show]
+  resources :sessions, only: [:create, :destroy]
   resources :home, only: [:show]
   resources :resources, only: [:index]
   resources :appointments
@@ -25,8 +27,6 @@ Rails.application.routes.draw do
   resources :users , except: [:index] do
     resources :appointments, only: [:index]
   end
-  resources :auth, only: [:show]
-  resources :sessions, only: [:create, :destroy]
   resources :insurers, only: [:create]
   resources :insurance_providers, only: [:create, :destroy]
 end
