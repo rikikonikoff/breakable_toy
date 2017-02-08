@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :resources, only: [:index]
   resources :appointments
   resources :providers
-  resources :users , except: [:index] do
+  resources :users, except: [:index] do
     resources :appointments, only: [:index]
   end
   resources :insurers, only: [:create]
