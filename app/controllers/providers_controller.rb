@@ -1,5 +1,5 @@
 class ProvidersController < ApplicationController
-    after_action :set_avatar!, only: [:create]
+  after_action :set_avatar!, only: [:create]
 
   def index
     @providers = Provider.all

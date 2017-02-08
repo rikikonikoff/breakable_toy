@@ -14,8 +14,8 @@ gem 'bootstrap'
 gem 'omniauth-google-oauth2'
 gem 'sendgrid'
 gem 'validates_email_format_of'
-gem 'sprockets-rails'
 gem 'carrierwave'
+gem 'sprockets-rails'
 
 group :test do
   gem 'coveralls', require: false
