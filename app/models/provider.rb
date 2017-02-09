@@ -1,4 +1,5 @@
 class Provider < ApplicationRecord
+  attr_accessor :avatar, :remote_avatar_url
   mount_uploader :avatar, AvatarUploader
 
   has_many :appointments
@@ -17,7 +18,7 @@ class Provider < ApplicationRecord
       record.uid = auth.uid
       record.name = auth.info.name
       record.email = auth.info.email
-      record.avatar = auth.info.image
+      record.remote_avatar_url = auth.info.image
     end
   end
 end

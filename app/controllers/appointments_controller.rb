@@ -4,7 +4,7 @@ class AppointmentsController < ApplicationController
       @appointments = Appointment.where(
         'provider_id = ? AND date >= ?', current_user.id, Date.today
       )
-    elsif params[:id] && session[:user_id]
+    elsif params[:user_id]
       @appointments = Appointment.where(
         'user_id = ? AND date >= ?', current_user.id, Date.today
       )
