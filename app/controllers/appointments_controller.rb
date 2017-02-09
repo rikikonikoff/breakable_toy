@@ -9,7 +9,7 @@ class AppointmentsController < ApplicationController
     else
       @appointments = Appointment.where('date >= ?', Date.today)
     end
-    @appointments
+    @appointments.sort_by{ |a| [a.date, a.start_time] }
   end
 
   def show

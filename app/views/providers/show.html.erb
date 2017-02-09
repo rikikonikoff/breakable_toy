@@ -14,8 +14,8 @@
           <div class="row" style="padding: 15px;">
             <img src="<%= @provider.avatar %>" class="col-xs-3">
             <div class="col-xs-9">
-              <p><%= @address %></p>
-              <p><%= @provider.email %></p>
+              <p>Address: <%= @address %></p>
+              <p>Email: <%= @provider.email %></p>
               <p style="text-align: justify;"><%= @provider.bio %></p>
               <% if @profile && @profile != "" %>
                 <p>

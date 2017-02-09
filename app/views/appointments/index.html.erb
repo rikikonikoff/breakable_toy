@@ -11,13 +11,20 @@
       <% @appointments.each do |a| %>
         <div class="card-block">
           <div class="appointments padded">
-            <%= link_to "#{a.date.strftime("%a %B %d, %Y")} @ #{a.start_time.strftime("%I:%M%p")}", appointment_path(a), class: "in-block-link-2" %>
+            <strong>
+              <%= link_to "#{a.date.strftime("%a %B %d, %Y")} @
+              #{a.start_time.strftime("%I:%M%p")}", appointment_path(a),
+              class: "in-block-link-2" %>
+            </strong>
 
             <% if signed_in_user %>
-              (Appointment with <%= link_to a.provider.name,
-                provider_path(a.provider), class: "in-block-link-2" %>
-              <% if a.provider.city != "" %>
-                in <%= a.provider.city %>
+              (Appointment with <strong><%= link_to a.provider.name,
+                provider_path(a.provider), class: "in-block-link-2" %></strong>
+              <% if a.provider.city && a.provider.city != "" %> in
+                <strong><a href="https://www.google.com/maps/place/
+                  <%= a.provider.city %>" class="in-block-link-2">
+                  <%= a.provider.city %>
+                </a></strong>
               <% end %>
               )
             <% end %>
@@ -30,17 +37,17 @@
                   (taken)
                 <% end %>
               <% elsif signed_in_provider && current_user == @provider %>
-                (booked by <%= link_to a.user.name, user_path(a.user),
-                  class: "in-block-link-2" %>)
+                (booked by <strong><%= link_to a.user.name, user_path(a.user),
+                  class: "in-block-link-2" %></strong>)
               <% end %>
             <% else %>
               (not yet booked)
             <% end %>
 
             <% if signed_in_provider && current_user == a.provider %>
-              <br/><%= link_to "Edit this Appointment", edit_appointment_path(a),
+              <%= link_to "Edit this Appointment", edit_appointment_path(a),
                 class: "in-block-link-2 "%>
-              |<%= link_to "Delete this Appointment", appointment_path(a),
+              | <%= link_to "Delete this Appointment", appointment_path(a),
                 method: :delete, data: { confirm: "Are you sure?" },
                 class: "in-block-link-2" %>
             <% end %>

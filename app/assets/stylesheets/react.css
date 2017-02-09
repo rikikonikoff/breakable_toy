@@ -17,3 +17,8 @@ body {
 #provider-path-link {
   text-align: center;
 }
+
+.form-control {
+  font-size: 18px;
+  width: 100%;;
+}
