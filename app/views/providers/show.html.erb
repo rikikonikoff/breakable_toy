@@ -7,7 +7,7 @@
   </div>
 
   <div class="row">
-    <div class="center">
+    <div class="provider center">
       <div class="card-block">
         <div class="appointments padded">
           <h3 style="text-align: center;">Info</h3>
@@ -17,9 +17,9 @@
               <p><%= @address %></p>
               <p><%= @provider.email %></p>
               <p style="text-align: justify;"><%= @provider.bio %></p>
-              <% if @provider.profile %>
+              <% if @profile && @profile != "" %>
                 <p>
-                  <a href="<%= @provider.profile %>" class="in-block-link-2">
+                  <a href="<%= @profile %>" class="in-block-link-2">
                   My Profile
                   </a>
                 </p>
@@ -33,7 +33,7 @@
   <br/>
 
   <div class="row">
-    <div class="center">
+    <div class="provider center">
       <div class="card-block">
         <div class="appointments padded">
           <h3 style="text-align: center;">My Appointments</h3>
@@ -63,7 +63,7 @@
               <% if signed_in_provider && current_user == @provider %>
                 <%= link_to "Edit this Appointment", edit_appointment_path(a),
                   class: "in-block-link-2 "%>
-                |<%= link_to "Delete this Appointment", appointment_path(a),
+                | <%= link_to "Delete this Appointment", appointment_path(a),
                   method: :delete, data: { confirm: "Are you sure?" },
                   class: "in-block-link-2" %>
               <% end %>
@@ -84,7 +84,7 @@
   <br/>
 
   <div class="row">
-    <div class="center">
+    <div class="provider center">
       <div class="card-block">
         <div class="appointments padded">
           <h3 style="text-align: center;">Insurances I Accept</h3>
@@ -110,7 +110,7 @@
 
   <% if current_user == @provider %>
   <div class="row">
-    <div class="center">
+    <div class="provider center">
       <div class="card-block">
         <div class="appointments padded" style="text-align: center;">
             <p>Add an Insurance Provider:</p>
@@ -121,14 +121,13 @@
   </div>
   <br/>
   <div class="row">
-    <div class="center">
+    <div class="provider center">
       <div class="card-block">
         <div class="appointments padded" style="text-align: center;">
           <%= link_to "Edit My Profile", edit_provider_path(@provider),
             class: "in-block-link-2" %>
-          <br/>
-          <%= link_to "Delete My Profile", provider_path(@provider),
-            method: :delete, confirm: "Are you sure?",
+          | <%= link_to "Delete My Profile", provider_path(@provider),
+            method: :delete, data: { confirm: "Are you sure?" },
             class: "in-block-link-2" %>
         </div>
       </div>

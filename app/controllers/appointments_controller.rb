@@ -2,12 +2,10 @@ class AppointmentsController < ApplicationController
   def index
     if session[:provider_id]
       @appointments = Appointment.where(
-        'provider_id = ? AND date >= ?', current_user.id, Date.today
-      )
+        'provider_id = ? AND date >= ?', current_user.id, Date.today)
     elsif params[:user_id]
       @appointments = Appointment.where(
-        'user_id = ? AND date >= ?', current_user.id, Date.today
-      )
+        'user_id = ? AND date >= ?', current_user.id, Date.today)
     else
       @appointments = Appointment.where('date >= ?', Date.today)
     end

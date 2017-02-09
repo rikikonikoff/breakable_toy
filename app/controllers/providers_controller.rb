@@ -12,6 +12,7 @@ class ProvidersController < ApplicationController
     @insurer = Insurer.new
     @address = "#{@provider.work_address} #{@provider.city}
       #{@provider.state} #{@provider.zip}"
+    @profile = @provider.profile
   end
 
   def new
