@@ -2,17 +2,17 @@
   <br/>
   <%= form_for @appointment do |f| %>
     <p class="date-select">
-      <%= f.label :date %>
+      <%= f.label :date, style: "text-size: 18;" %>
       <%= date_select :appointment, :date,
         start_year: Date.today.year,
         end_year: 3.years.from_now.year %>
     </p>
     <p class="start-time-select">
-      <%= f.label :start_time %>
+      <%= f.label :start_time, style: "font-size: 18;" %>
       <%= time_select :appointment, :start_time, ampm: true, minute_step: 15 %>
     </p>
-    <p class="end-time-select">
-      <%= f.label :end_time %>
+    <p class="end-time-select" style="padding-bottom: 15px;">
+      <%= f.label :end_time, style: "font-size: 18;" %>
       <%= time_select :appointment, :end_time, ampm: true, minute_step: 15  %>
     </p>
     <p>

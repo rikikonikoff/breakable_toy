@@ -66,10 +66,16 @@ a.in-block-link-2:hover {
 
 .appointment-form {
   margin: 0 auto;
-  width: 60%;
+  width: 65%;
+  font-size: 18px;
 }
 
 .provider-form {
   margin: 0 auto;
   width: 100%;
+}
+
+.provider.center {
+  margin: 0 auto;
+  width: 90%;
 }

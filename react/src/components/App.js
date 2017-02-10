@@ -31,7 +31,7 @@ class App extends Component {
           <h1 className="col-md-4">Providers</h1>
         </div>
         <div className="row">
-          <div className="col-md-4">{search}</div>
+          <div className="col-xs-6">{search}</div>
         </div>
         <div>{providersContainer}</div>
       </div>

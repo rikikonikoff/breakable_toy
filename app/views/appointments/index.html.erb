@@ -7,24 +7,49 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="provider center">
       <% @appointments.each do |a| %>
         <div class="card-block">
           <div class="appointments padded">
-            <%= link_to "#{a.date.strftime("%a %B %d, %Y")} @ #{a.start_time.strftime("%I:%M%p")}", appointment_path(a), class: "in-block-link-2" %>
-            <% if signed_in_user %>
-              (Appointment with
-              <%= link_to a.provider.name, provider_path(a.provider), class: "in-block-link-2" %> in
-              <%= a.provider.city %>)
+            <strong>
+              <%= link_to "#{a.date.strftime("%a %B %d, %Y")} @
+              #{a.start_time.strftime("%I:%M%p")}", appointment_path(a),
+              class: "in-block-link-2" %>
+            </strong>
 
-            <% elsif current_user == a.provider %>
-              <% if a.booked? %>
-                (booked by
-                <%= link_to a.user.name,
-                user_path(a.user), class: "in-block-link-2" %>)
-              <% else %>
-                (not yet booked)
+            <% if signed_in_user %>
+              (Appointment with <strong><%= link_to a.provider.name,
+                provider_path(a.provider), class: "in-block-link-2" %></strong>
+              <% if a.provider.city && a.provider.city != "" %> in
+                <strong><a href="https://www.google.com/maps/place/
+                  <%= a.provider.city %>" class="in-block-link-2">
+                  <%= a.provider.city %>
+                </a></strong>
               <% end %>
+              )
+            <% end %>
+
+            <% if a.booked? %>
+              <% if signed_in_user %>
+                <% if current_user.id == a.user_id %>
+                  (you have claimed this appointment)
+                <% else %>
+                  (taken)
+                <% end %>
+              <% elsif signed_in_provider && current_user == @provider %>
+                (booked by <strong><%= link_to a.user.name, user_path(a.user),
+                  class: "in-block-link-2" %></strong>)
+              <% end %>
+            <% else %>
+              (not yet booked)
+            <% end %>
+
+            <% if signed_in_provider && current_user == a.provider %>
+              <%= link_to "Edit this Appointment", edit_appointment_path(a),
+                class: "in-block-link-2 "%>
+              | <%= link_to "Delete this Appointment", appointment_path(a),
+                method: :delete, data: { confirm: "Are you sure?" },
+                class: "in-block-link-2" %>
             <% end %>
           </div>
         </div>

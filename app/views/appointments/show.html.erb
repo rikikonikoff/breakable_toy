@@ -1,10 +1,11 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="center">
+    <div class="provider center">
       <div class="col-sm-12">
         <div class="card-block">
-          <h3 style="text-align: center;">
-            Appointment with <%= @provider.name %> <br/>
+          <h3 style="text-align: center; padding: 15px;">
+            Appointment with <strong><%= link_to @provider.name,
+            provider_path(@provider), class: "in-block-link-2" %></strong>
             at <%= @start %> on <%= @end %>
           </h3>
         </div>
@@ -13,9 +14,9 @@
   </div>
 
   <div class="row">
-    <div class="center">
+    <div class="provider center">
       <div class="col-sm-12">
-        <div class="card-block">
+        <div class="card-block" style="font-size: 18px;">
           <p class="col-sm-4">Address:</p>
           <% if @address != "" %>
             <strong><%= @address %></strong>
@@ -31,9 +32,9 @@
   </div>
 
   <div class="row">
-    <div class="center">
+    <div class="provider center">
       <div class="col-sm-12">
-        <div class="card-block">
+        <div class="card-block" style="font-size: 18px;">
           <p style="text-align: center; padding: 5px;">Booked: <%= @booked %></p>
           <% if signed_in_user %>
             <% if @appointment.booked? && @appointment.user_id == current_user.id %>
