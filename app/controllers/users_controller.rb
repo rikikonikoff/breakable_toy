@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @appointments = @user.appointments
+    appointments = @user.appointments
+    @appointments = appointments.sort_by { |a| [a.date, a.start_time] }
     @insurers = @user.insurers
     @insurer = Insurer.new
   end

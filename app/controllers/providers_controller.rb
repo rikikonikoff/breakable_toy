@@ -1,13 +1,12 @@
 class ProvidersController < ApplicationController
   after_action :set_avatar!, only: [:create]
 
-  def index
-    @providers = Provider.all
-  end
+  def index; end
 
   def show
     @provider = Provider.find(params[:id])
-    @appointments = @provider.appointments
+    appointments = @provider.appointments
+    @appointments = appointments.sort_by { |a| [a.date, a.start_time] }
     @insurers = @provider.insurers
     @insurer = Insurer.new
     @address = "#{@provider.work_address} #{@provider.city}
