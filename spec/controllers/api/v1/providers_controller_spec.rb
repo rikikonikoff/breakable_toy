@@ -30,7 +30,8 @@ RSpec.describe Api::V1::ProvidersController, type: :controller do
 
       expect(json[0]["appointments"].length).to eq(1)
       expect(json[1]["appointments"].length).to eq(0)
-      expect(json[0]["appointments"][0]["user_id"]).to eq(appointment.user_id)
+      expect(json[0]["users"][0]["id"]).to eq(user.id)
+      expect(json[0]["users"][0]["name"]).to eq(user.name)
     end
   end
 
