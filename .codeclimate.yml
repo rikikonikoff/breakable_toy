@@ -43,3 +43,6 @@ ratings:
   - "**.rb"
   - "**.rhtml"
   - "**.slim"
+  exclude_paths:
+  - "spec/"
+  - "db/"

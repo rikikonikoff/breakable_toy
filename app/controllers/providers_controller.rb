@@ -1,13 +1,12 @@
 class ProvidersController < ApplicationController
   after_action :set_avatar!, only: [:create]
 
-  def index
-    @providers = Provider.all
-  end
+  def index; end
 
   def show
     @provider = Provider.find(params[:id])
-    @appointments = @provider.appointments
+    appointments = @provider.appointments
+    @appointments = appointments.sort_by { |a| [a.date, a.start_time] }
     @insurers = @provider.insurers
     @insurer = Insurer.new
     @address = "#{@provider.work_address} #{@provider.city}
@@ -61,7 +60,16 @@ class ProvidersController < ApplicationController
 
   def destroy
     @provider = Provider.find(params[:id])
-    @provider.destroy
+    @provider.appointments.destroy_all
+    @provider.insurance_providers.destroy_all
+    session.destroy
+    if @provider.destroy
+      flash[:notice] = "Profile Deleted"
+      redirect_to root_path
+    else
+      flash[:notice] = "There was an error deleting your profile"
+      render :show
+    end
   end
 
   private
