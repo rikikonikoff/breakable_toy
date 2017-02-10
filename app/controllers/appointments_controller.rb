@@ -9,7 +9,7 @@ class AppointmentsController < ApplicationController
     else
       @appointments = Appointment.where('date >= ?', Date.today)
     end
-    @appointments.sort_by{ |a| [a.date, a.start_time] }
+    @appointments = @appointments.sort_by{ |a| [a.date, a.start_time] }
   end
 
   def show
@@ -43,13 +43,16 @@ class AppointmentsController < ApplicationController
   def define_map_link
     @map_link = ""
     if @provider.work_address && @provider.city && @provider.state && @provider.zip
-      @map_link = "https://www.google.com/maps/place/#{@provider.work_address.tr(' ', '+')}+#{@provider.city}+#{@provider.state}+#{@provider.zip}"
+      @map_link = "https://www.google.com/maps/place/#{@provider.work_address}
+        +#{@provider.city}+#{@provider.state}+#{@provider.zip}"
     elsif @provider.work_address && @provider.city && @provider.zip
-      @map_link = "https://www.google.com/maps/place/#{@provider.work_address.tr(' ', '+')}+#{@provider.city}+#{@provider.zip}"
+      @map_link = "https://www.google.com/maps/place/#{@provider.work_address}
+        +#{@provider.city}+#{@provider.zip}"
     elsif @provider.work_address && @provider.zip
-      @map_link = "https://www.google.com/maps/place/#{@provider.work_address.tr(' ', '+')}+#{@provider.zip}"
+      @map_link = "https://www.google.com/maps/place/#{@provider.work_address}
+        +#{@provider.zip}"
     elsif @provider.work_address
-      @map_link = "https://www.google.com/maps/place/#{@provider.work_address.tr(' ', '+')}"
+      @map_link = "https://www.google.com/maps/place/#{@provider.work_address}"
     end
   end
 

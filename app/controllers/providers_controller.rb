@@ -61,7 +61,16 @@ class ProvidersController < ApplicationController
 
   def destroy
     @provider = Provider.find(params[:id])
-    @provider.destroy
+    @provider.appointments.destroy_all
+    @provider.insurance_providers.destroy_all
+    session.destroy
+    if @provider.destroy
+      flash[:notice] = "Profile Deleted"
+      redirect_to root_path
+    else
+      flash[:notice] = "There was an error deleting your profile"
+      render :show
+    end
   end
 
   private
