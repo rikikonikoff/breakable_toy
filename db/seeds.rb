@@ -14,8 +14,8 @@ p4 = Provider.create(name: "Erwin Schrodinger", email: "isthecatalive@itsunclear
   uid: "1011", remote_avatar_url: "http://www.chemistryexplained.com/images/chfa_04_img0825.jpg")
 p5 = Provider.create(name: "Dr. Sigmund Freud", email: "superego@id.com",
   uid: "1213", remote_avatar_url: "http://www.sigmundfreud.net/images/sigmund-freud.jpg")
-p6 = Provider.create(name: "B. F. Skinner", email: "operant.conditioning@behavior.com",
-  uid: "1415", remote_avatar_url: "https://www.biography.com/.image/c_fill,cs_srgb,dpr_1.0,g_face,h_300,q_80,w_300/MTE5NTU2MzE2MzcxNTg0NTIz/bf-skinner-9485671-1-402.jpg")
+p6 = Provider.create!(name: "B. F. Skinner", email: "operant.conditioning@behavior.com",
+  uid: "1415", remote_avatar_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/B.F._Skinner_at_Harvard_circa_1950.jpg/220px-B.F._Skinner_at_Harvard_circa_1950.jpg")
 p7 = Provider.create(name: "Ivan Pavlov", email: "classical.conditioning@bells.com", remote_avatar_url: "http://www.notablebiographies.com/images/uewb_08_img0547.jpg",
   uid: "1617")
 p8 = Provider.create(name: "Anna Freud", email: "childpsychology@example.com",

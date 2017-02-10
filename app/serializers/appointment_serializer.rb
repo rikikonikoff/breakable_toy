@@ -3,7 +3,8 @@ class AppointmentSerializer < ActiveModel::Serializer
     :date,
     :start_time,
     :end_time,
-    :user_id
+    :booked?
 
   belongs_to :provider
+  belongs_to :user
 end
