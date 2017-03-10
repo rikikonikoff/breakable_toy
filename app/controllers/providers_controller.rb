@@ -1,6 +1,4 @@
 class ProvidersController < ApplicationController
-  after_action :set_avatar!, only: [:create]
-
   def index; end
 
   def show
@@ -15,16 +13,16 @@ class ProvidersController < ApplicationController
   end
 
   def new
-    @provider = Provider.new(oauth_uid: session[:auth]["uid"])
+    @provider = Provider.new(uid: session[:auth]["uid"])
     redirect_to providers_path, method: :post
   end
 
   def create
     @info = session[:auth]["info"]
-    @provider = Provider.new(oauth_uid: session[:auth]["uid"])
+    @provider = Provider.new(uid: session[:auth]["uid"])
     @provider.name = @info["name"]
     @provider.email = @info["email"]
-    @provider.avatar = @info["image"]
+    @provider.remote_avatar_url = @info["image"]
     check_provider_auth(@provider)
   end
 

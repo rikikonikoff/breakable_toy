@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new(oauth_uid: session[:auth]["uid"])
+    @user = User.new(uid: session[:auth]["uid"])
   end
 
   def create

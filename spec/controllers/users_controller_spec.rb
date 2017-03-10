@@ -8,6 +8,7 @@ RSpec.describe UsersController, type: :controller do
         auth: { "info" => { "name" => "Foob", "email" => "foob@example.com" } }
       }
       expect(response).to have_http_status(:redirect)
+      expect(User.find_by(name: "Foob").email).to eq("foob@example.com")
     end
   end
 

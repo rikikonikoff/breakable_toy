@@ -49,5 +49,4 @@ RSpec.describe Api::V1::ProvidersController, type: :controller do
       json = JSON.parse(response.body)
     end
   end
-
 end

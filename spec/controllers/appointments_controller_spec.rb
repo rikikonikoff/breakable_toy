@@ -8,5 +8,4 @@ RSpec.describe AppointmentsController, type: :controller do
       expect(response).to have_http_status(:redirect)
     end
   end
-
 end
