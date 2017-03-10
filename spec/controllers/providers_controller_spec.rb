@@ -18,7 +18,6 @@ RSpec.describe ProvidersController, type: :controller do
         } }
       }
       expect(response).to have_http_status(:redirect)
-      binding.pry
       expect(Provider.find_by(name: "Foob").email).to eq("foob@example.com")
       expect(Provider.find_by(name: "Foob").remote_avatar_url).to eq("123.jpg")
     end
